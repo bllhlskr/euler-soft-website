@@ -17,11 +17,15 @@ const s = en;
         <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
             <div class="md:col-span-3">
                 <form
-                    action="https://formspree.io/f/xplaceholder"
+                    action="https://formsubmit.co/eulersoft@outlook.com"
                     method="POST"
                     class="space-y-5"
                     id="contact-form"
                 >
+                    <input type="hidden" name="_captcha" value="false" />
+                    <input type="hidden" name="_next" value="https://euler-soft.com/contact" />
+                    <input type="hidden" name="_subject" value="Euler Soft Contact Form" />
+                    <input type="text" name="_honey" style="display:none" />
                     <div>
                         <label for="name" class="block text-sm font-medium text-gray-700 mb-1">{t(s, "contact.form.name")}</label>
                         <input
