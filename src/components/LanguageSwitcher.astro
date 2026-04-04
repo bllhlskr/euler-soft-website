@@ -1,0 +1,69 @@
+---
+import { languages, type Locale, defaultLocale } from "../i18n/languages";
+import { localePath } from "../i18n/utils";
+
+interface Props {
+    currentLocale?: Locale;
+    currentPath?: string;
+}
+
+const { currentLocale = defaultLocale, currentPath = "/" } = Astro.props;
+const currentLang = languages[currentLocale];
+
+const basePath = currentLocale === defaultLocale
+    ? currentPath
+    : currentPath.replace(`/${currentLocale}`, "") || "/";
+---
+
+<div class="relative" data-lang-switcher>
+    <button
+        type="button"
+        class="flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-900 transition-colors px-2 py-1 rounded-lg hover:bg-gray-50"
+        aria-label="Change language"
+        data-lang-toggle
+    >
+        <span class="text-base">{currentLang.flag}</span>
+        <span class="hidden sm:inline">{currentLang.name}</span>
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+    </button>
+
+    <div
+        class="absolute right-0 top-full mt-1 w-48 max-h-64 overflow-y-auto rounded-xl border border-gray-100 bg-white shadow-lg hidden z-50"
+        data-lang-menu
+    >
+        {Object.entries(languages).map(([code, lang]) => {
+            const isActive = code === currentLocale;
+            const href = localePath(code as Locale, basePath);
+            return (
+                <a
+                    href={href}
+                    class:list={[
+                        "flex items-center gap-2.5 px-3 py-2 text-sm transition-colors",
+                        isActive ? "bg-gray-50 text-gray-900 font-medium" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
+                    ]}
+                >
+                    <span class="text-base">{lang.flag}</span>
+                    <span>{lang.name}</span>
+                </a>
+            );
+        })}
+    </div>
+</div>
+
+<script>
+    document.querySelectorAll("[data-lang-switcher]").forEach((switcher) => {
+        const toggle = switcher.querySelector("[data-lang-toggle]");
+        const menu = switcher.querySelector("[data-lang-menu]");
+
+        toggle?.addEventListener("click", (e) => {
+            e.stopPropagation();
+            menu?.classList.toggle("hidden");
+        });
+
+        document.addEventListener("click", () => {
+            menu?.classList.add("hidden");
+        });
+    });
+</script>

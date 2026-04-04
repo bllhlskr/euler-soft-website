@@ -2,15 +2,19 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import AppCard from "../components/AppCard.astro";
 import { apps } from "../data/apps";
+import en from "../i18n/ui/en";
+import { t } from "../i18n/utils";
+
+const s = en;
 ---
 
 <BaseLayout title="Euler Soft — iOS Apps Crafted with Care">
     <section class="max-w-5xl mx-auto px-6 pt-20 pb-16 text-center">
         <h1 class="text-5xl sm:text-6xl font-bold tracking-tight text-gray-900">
-            Euler Soft
+            {t(s, "home.title")}
         </h1>
         <p class="mt-4 text-lg sm:text-xl text-gray-500 max-w-2xl mx-auto">
-            Thoughtfully designed iOS apps that make everyday tasks simpler.
+            {t(s, "home.subtitle")}
         </p>
     </section>
 

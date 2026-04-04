@@ -1,30 +1,47 @@
 ---
+import LanguageSwitcher from "../components/LanguageSwitcher.astro";
+import { defaultLocale, languages, type Locale } from "../i18n/languages";
+import { localePath, loadTranslation, t } from "../i18n/utils";
+
 interface Props {
     title: string;
     description?: string;
+    locale?: Locale;
 }
 
-const { title, description = "Euler Soft — iOS apps crafted with care." } = Astro.props;
+const { title, description = "Euler Soft — iOS apps crafted with care.", locale = defaultLocale } = Astro.props;
+const s = await loadTranslation(locale);
+const dir = languages[locale].dir;
+const currentPath = Astro.url.pathname;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={locale} dir={dir}>
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content={description} />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="alternate" hreflang="x-default" href="https://euler-soft.com/" />
+        {Object.keys(languages).map((lang) => (
+            <link rel="alternate" hreflang={lang} href={`https://euler-soft.com${localePath(lang as Locale, "/")}`} />
+        ))}
         <title>{title}</title>
     </head>
     <body class="bg-white text-gray-900 antialiased">
         <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-100">
             <nav class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
-                <a href="/" class="text-xl font-semibold tracking-tight text-gray-900">
+                <a href={localePath(locale)} class="text-xl font-semibold tracking-tight text-gray-900">
                     Euler Soft
                 </a>
-                <div class="flex items-center gap-6 text-sm text-gray-500">
-                    <a href="/privacy-policy" class="hover:text-gray-900 transition-colors">Privacy</a>
-                    <a href="/terms-of-use" class="hover:text-gray-900 transition-colors">Terms</a>
+                <div class="flex items-center gap-4 sm:gap-6 text-sm text-gray-500">
+                    <a href={localePath(locale, "/support")} class="hover:text-gray-900 transition-colors">{t(s, "nav.support")}</a>
+                    <a href={localePath(locale, "/contact")} class="hover:text-gray-900 transition-colors">{t(s, "nav.contact")}</a>
+                    <div class="hidden sm:flex items-center gap-4">
+                        <a href={localePath(locale, "/privacy-policy")} class="hover:text-gray-900 transition-colors">{t(s, "nav.privacy")}</a>
+                        <a href={localePath(locale, "/terms-of-use")} class="hover:text-gray-900 transition-colors">{t(s, "nav.terms")}</a>
+                    </div>
+                    <LanguageSwitcher currentLocale={locale} currentPath={currentPath} />
                 </div>
             </nav>
         </header>
@@ -35,11 +52,12 @@ const { title, description = "Euler Soft — iOS apps crafted with care." } = As
 
         <footer class="border-t border-gray-100 mt-24">
             <div class="max-w-5xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-400">
-                <p>&copy; {new Date().getFullYear()} Euler Soft. All rights reserved.</p>
-                <div class="flex gap-6">
-                    <a href="/privacy-policy" class="hover:text-gray-600 transition-colors">Privacy Policy</a>
-                    <a href="/terms-of-use" class="hover:text-gray-600 transition-colors">Terms of Use</a>
-                    <a href="mailto:eulersoft@outlook.com" class="hover:text-gray-600 transition-colors">Contact</a>
+                <p>{t(s, "footer.copyright", { year: new Date().getFullYear().toString() })}</p>
+                <div class="flex flex-wrap justify-center gap-4 sm:gap-6">
+                    <a href={localePath(locale, "/support")} class="hover:text-gray-600 transition-colors">{t(s, "nav.support")}</a>
+                    <a href={localePath(locale, "/contact")} class="hover:text-gray-600 transition-colors">{t(s, "footer.contact")}</a>
+                    <a href={localePath(locale, "/privacy-policy")} class="hover:text-gray-600 transition-colors">{t(s, "footer.privacy")}</a>
+                    <a href={localePath(locale, "/terms-of-use")} class="hover:text-gray-600 transition-colors">{t(s, "footer.terms")}</a>
                 </div>
             </div>
         </footer>

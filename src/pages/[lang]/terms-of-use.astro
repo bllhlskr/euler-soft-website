@@ -1,0 +1,29 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { nonDefaultLocales, defaultLocale, type Locale } from "../../i18n/languages";
+import { loadTranslation, t, localePath } from "../../i18n/utils";
+
+export function getStaticPaths() {
+    return nonDefaultLocales.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: Locale };
+const s = await loadTranslation(lang);
+
+let legalHtml: string | null = null;
+try {
+    const mod = await import(`../../i18n/legal/terms/${lang}.ts`);
+    legalHtml = mod.default;
+} catch {}
+---
+
+<BaseLayout title={`${t(s, "footer.terms")} — Euler Soft`} locale={lang}>
+    <article class="max-w-3xl mx-auto px-6 py-16 prose prose-gray">
+        {!legalHtml && (
+            <div class="not-prose mb-8 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
+                {t(s, "legal.courtesy").replace("{link}", `<a href="/terms-of-use" class="underline font-medium">${t(s, "legal.courtesy.link")}</a>`)}
+            </div>
+        )}
+        {legalHtml ? <Fragment set:html={legalHtml} /> : null}
+    </article>
+</BaseLayout>
