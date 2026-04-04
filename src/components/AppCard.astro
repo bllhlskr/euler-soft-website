@@ -1,0 +1,44 @@
+---
+interface Props {
+    name: string;
+    icon: string;
+    description: string;
+    appStoreUrl: string;
+    category: string;
+}
+
+const { name, icon, description, appStoreUrl, category } = Astro.props;
+---
+
+<a
+    href={appStoreUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="group block rounded-2xl border border-gray-100 bg-white p-6 transition-all hover:shadow-lg hover:shadow-gray-100 hover:-translate-y-1"
+>
+    <div class="flex items-start gap-4">
+        <img
+            src={icon}
+            alt={`${name} icon`}
+            width="72"
+            height="72"
+            class="rounded-[16px] shadow-sm flex-shrink-0"
+            loading="lazy"
+        />
+        <div class="min-w-0">
+            <span class="text-xs font-medium text-gray-400 uppercase tracking-wider">{category}</span>
+            <h3 class="mt-1 text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors truncate">
+                {name}
+            </h3>
+            <p class="mt-1 text-sm text-gray-500 line-clamp-2">{description}</p>
+        </div>
+    </div>
+    <div class="mt-4 flex justify-end">
+        <img
+            src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83"
+            alt="Download on the App Store"
+            class="h-10"
+            loading="lazy"
+        />
+    </div>
+</a>
