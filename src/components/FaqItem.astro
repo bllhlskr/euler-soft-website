@@ -1,0 +1,28 @@
+---
+import type { AppTheme } from "../data/apps";
+import { getAppThemeClasses } from "../data/appThemes";
+
+interface Props {
+    question: string;
+    answer: string;
+    theme?: AppTheme;
+}
+
+const { question, answer, theme } = Astro.props;
+const accent = theme ? getAppThemeClasses(theme) : null;
+const summaryClass = accent ? accent.chipSoft : "border-white/10 bg-white/[0.04] text-white/75";
+---
+
+<details class="group overflow-hidden rounded-[28px] border border-white/10 bg-white/[0.03] backdrop-blur-xl transition duration-300 hover:border-white/[0.15]">
+    <summary class="flex min-h-[72px] cursor-pointer items-center justify-between gap-4 px-5 py-5 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
+        <span class="font-display text-lg tracking-[-0.02em] text-mist">{question}</span>
+        <span class={`inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border transition duration-300 group-open:rotate-45 ${summaryClass}`}>
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 5v14M5 12h14" />
+            </svg>
+        </span>
+    </summary>
+    <div class="border-t border-white/10 px-5 pb-5 pt-4 text-sm leading-7 text-white/[0.68]">
+        <p>{answer}</p>
+    </div>
+</details>

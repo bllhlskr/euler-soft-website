@@ -1,0 +1,52 @@
+---
+interface Props {
+    title: string;
+    subtitle: string;
+    courtesyBefore?: string;
+    courtesyAfter?: string;
+    courtesyHref?: string;
+    courtesyLabel?: string;
+}
+
+const { title, subtitle, courtesyBefore, courtesyAfter, courtesyHref, courtesyLabel } = Astro.props;
+const showCourtesy = Boolean(courtesyHref && courtesyLabel);
+---
+
+<section class="pt-10 sm:pt-14">
+    <div class="mx-auto max-w-shell px-6">
+        <div class="relative overflow-hidden rounded-[40px] border border-white/10 bg-white/[0.04] px-6 py-12 shadow-glow backdrop-blur-2xl sm:px-10 sm:py-16">
+            <div class="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white/25 to-transparent"></div>
+            <div class="absolute inset-y-0 start-0 w-1/2 bg-[radial-gradient(circle_at_top_left,rgba(89,208,255,0.22),transparent_65%)]"></div>
+            <div class="absolute inset-y-0 end-0 w-1/2 bg-[radial-gradient(circle_at_top_right,rgba(120,121,255,0.2),transparent_60%)]"></div>
+
+            <div class="relative max-w-3xl">
+                <span class="inline-flex min-h-[36px] items-center rounded-full border border-white/[0.12] bg-white/[0.06] px-4 py-1 text-[0.68rem] uppercase tracking-[0.3em] text-white/[0.6]">
+                    Euler Soft
+                </span>
+                <h1 class="mt-6 font-display text-4xl font-semibold tracking-[-0.05em] text-mist sm:text-6xl">
+                    {title}
+                </h1>
+                <p class="mt-4 max-w-2xl text-base leading-8 text-white/70 sm:text-lg">
+                    {subtitle}
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="pb-24 pt-8">
+    <div class="mx-auto max-w-5xl px-6">
+        <article class="prose prose-slate max-w-none rounded-[40px] bg-veil px-6 py-10 shadow-card sm:px-10 lg:px-14">
+            {showCourtesy && (
+                <div class="not-prose mb-8 rounded-[24px] border border-amber/25 bg-amber/10 p-5 text-sm leading-7 text-ink/70">
+                    {courtesyBefore}
+                    <a href={courtesyHref} class="font-medium text-ink underline decoration-amber/50 underline-offset-4">
+                        {courtesyLabel}
+                    </a>
+                    {courtesyAfter}
+                </div>
+            )}
+            <slot />
+        </article>
+    </div>
+</section>

@@ -1,7 +1,6 @@
 ---
+import HomeContent from "../../components/HomeContent.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import AppCard from "../../components/AppCard.astro";
-import { apps } from "../../data/apps";
 import { nonDefaultLocales, type Locale } from "../../i18n/languages";
 import { loadTranslation, t } from "../../i18n/utils";
 
@@ -14,28 +13,5 @@ const s = await loadTranslation(lang);
 ---
 
 <BaseLayout title={`${t(s, "home.title")} — ${t(s, "home.subtitle")}`} description={t(s, "site.description")} locale={lang}>
-    <section class="max-w-5xl mx-auto px-6 pt-20 pb-16 text-center">
-        <h1 class="text-5xl sm:text-6xl font-bold tracking-tight text-gray-900">
-            {t(s, "home.title")}
-        </h1>
-        <p class="mt-4 text-lg sm:text-xl text-gray-500 max-w-2xl mx-auto">
-            {t(s, "home.subtitle")}
-        </p>
-    </section>
-
-    <section class="max-w-5xl mx-auto px-6 pb-20">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {apps.map((app) => {
-                return (
-                    <AppCard
-                        name={t(s, `app.${app.slug}.name`)}
-                        icon={app.icon}
-                        description={t(s, `app.${app.slug}.description`)}
-                        appStoreUrl={app.appStoreUrl}
-                        category={app.category}
-                    />
-                );
-            })}
-        </div>
-    </section>
+    <HomeContent locale={lang} strings={s} />
 </BaseLayout>

@@ -1,0 +1,134 @@
+---
+import { apps } from "../data/apps";
+import type { Locale } from "../i18n/languages";
+import { localePath, t } from "../i18n/utils";
+import FaqItem from "./FaqItem.astro";
+
+interface Props {
+    locale: Locale;
+    strings: Record<string, string>;
+}
+
+const { locale, strings: s } = Astro.props;
+const appKeys = [
+    "blood-sugar-tracker",
+    "plant-identifier",
+    "insect-identifier",
+    "antique-identifier",
+    "card-value-scanner",
+    "blood-pressure-diary",
+    "card-centering",
+    "fasting-tracker",
+    "class-planner",
+    "pitch-counter",
+    "pill-reminder",
+];
+const generalFaqKeys = ["q1", "q2", "q3", "q4", "q5", "q6"];
+
+function getAppFaqs(appKey: string) {
+    const faqs: { q: string; a: string }[] = [];
+    for (let i = 1; i <= 5; i++) {
+        const qKey = `faq.${appKey}.q${i}`;
+        const aKey = `faq.${appKey}.a${i}`;
+        if (s[qKey]) {
+            faqs.push({ q: t(s, qKey), a: t(s, aKey) });
+        }
+    }
+    return faqs;
+}
+---
+
+<section class="pt-10 sm:pt-14">
+    <div class="mx-auto max-w-shell px-6">
+        <div class="relative overflow-hidden rounded-[40px] border border-white/10 bg-white/[0.04] px-6 py-12 shadow-glow backdrop-blur-2xl sm:px-10 sm:py-16">
+            <div class="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+            <div class="absolute -start-16 top-6 h-64 w-64 rounded-full bg-violet/[0.18] blur-3xl"></div>
+            <div class="absolute end-0 top-10 h-72 w-72 rounded-full bg-sky/[0.15] blur-3xl"></div>
+
+            <div class="relative grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(20rem,0.7fr)] lg:items-end">
+                <div class="max-w-3xl">
+                    <span class="inline-flex min-h-[36px] items-center rounded-full border border-white/[0.12] bg-white/[0.06] px-4 py-1 text-[0.68rem] uppercase tracking-[0.3em] text-white/[0.6]">
+                        {t(s, "support.title")}
+                    </span>
+                    <h1 class="mt-6 font-display text-4xl font-semibold tracking-[-0.05em] text-mist sm:text-6xl">
+                        {t(s, "support.title")}
+                    </h1>
+                    <p class="mt-4 max-w-2xl text-base leading-8 text-white/[0.72] sm:text-lg">
+                        {t(s, "support.subtitle")}
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-3 gap-3">
+                    {apps.slice(0, 6).map((app) => (
+                        <div class="rounded-[24px] border border-white/10 bg-white/[0.06] p-4 text-center">
+                            <img src={app.icon} alt="" width="72" height="72" class="mx-auto h-16 w-16 rounded-[18px] shadow-card" loading="lazy" />
+                            <p class="mt-3 text-xs uppercase tracking-[0.24em] text-white/[0.45]">{app.category}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="pb-14 pt-8 sm:pb-18">
+    <div class="mx-auto max-w-shell px-6">
+        <div class="grid gap-6 lg:grid-cols-[22rem_minmax(0,1fr)]">
+            <aside class="rounded-[32px] border border-white/10 bg-white/[0.04] p-6 shadow-glow backdrop-blur-2xl lg:sticky lg:top-28 lg:h-fit">
+                <p class="text-sm uppercase tracking-[0.3em] text-white/[0.45]">{t(s, "support.general")}</p>
+                <h2 class="mt-4 font-display text-3xl font-semibold tracking-[-0.04em] text-mist">
+                    {t(s, "contact.response")}
+                </h2>
+                <p class="mt-4 text-sm leading-7 text-white/[0.68]">{t(s, "contact.subtitle")}</p>
+                <a
+                    href={localePath(locale, "/contact")}
+                    class="mt-8 inline-flex min-h-[48px] items-center rounded-full bg-mist px-5 py-3 text-sm font-medium text-ink transition hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                >
+                    {t(s, "nav.contact")}
+                </a>
+            </aside>
+
+            <div class="space-y-4">
+                {generalFaqKeys.map((key) => (
+                    <FaqItem question={t(s, `faq.general.${key}`)} answer={t(s, `faq.general.a${key.slice(1)}`)} />
+                ))}
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="pb-24">
+    <div class="mx-auto max-w-shell px-6">
+        <div class="grid gap-6 xl:grid-cols-2">
+            {appKeys.map((appKey) => {
+                const faqs = getAppFaqs(appKey);
+                if (faqs.length === 0) return null;
+                const app = apps.find((item) => item.slug === appKey);
+                if (!app) return null;
+
+                return (
+                    <article class="rounded-[34px] border border-white/10 bg-white/[0.04] p-7 shadow-glow backdrop-blur-2xl">
+                        <div class="flex items-start gap-4">
+                            <img src={app.icon} alt="" width="84" height="84" class="h-20 w-20 rounded-[22px] shadow-card" loading="lazy" />
+                            <div>
+                                <p class="text-xs uppercase tracking-[0.28em] text-white/[0.4]">{app.category}</p>
+                                <h2 class="mt-2 font-display text-2xl font-semibold tracking-[-0.04em] text-mist">
+                                    {t(s, `app.${app.slug}.name`)}
+                                </h2>
+                                <p class="mt-3 text-sm leading-7 text-white/[0.65]">
+                                    {t(s, `app.${app.slug}.description`)}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="mt-7 space-y-4">
+                            {faqs.map((faq) => (
+                                <FaqItem question={faq.q} answer={faq.a} theme={app.theme} />
+                            ))}
+                        </div>
+                    </article>
+                );
+            })}
+        </div>
+    </div>
+</section>

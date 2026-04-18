@@ -18,8 +18,8 @@ const siteUrl = Astro.site?.toString() ?? "https://euler-soft.com";
 const normalizedPath = stripLocaleFromPath(locale, currentPath);
 const canonicalUrl = new URL(currentPath, siteUrl).toString();
 const defaultOgImage = new URL("/images/blood-sugar-tracker.png", siteUrl).toString();
-const navLinkClass = "inline-flex min-h-[44px] items-center rounded-lg px-3 py-2 text-sm text-gray-500 transition-colors hover:bg-gray-50 hover:text-gray-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900";
-const footerLinkClass = "inline-flex min-h-[44px] items-center rounded-lg px-2 py-2 transition-colors hover:text-gray-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900";
+const navLinkClass = "inline-flex min-h-[44px] items-center rounded-full px-4 py-2 text-sm text-white/[0.58] transition hover:bg-white/[0.08] hover:text-mist focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white";
+const footerLinkClass = "inline-flex min-h-[44px] items-center rounded-full px-3 py-2 transition hover:bg-white/[0.05] hover:text-mist focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white";
 const ogLocaleByLanguage: Record<Locale, string> = {
     en: "en_US",
     tr: "tr_TR",
@@ -105,25 +105,25 @@ const structuredData = JSON.stringify([
         <script type="application/ld+json" set:html={structuredData}></script>
         <title>{title}</title>
     </head>
-    <body class="bg-white text-gray-900 antialiased">
+    <body class="bg-ink font-text text-mist antialiased">
         <a
             href="#main-content"
-            class="sr-only fixed start-4 top-4 z-[60] rounded-lg bg-gray-900 px-4 py-3 text-sm font-medium text-white focus:not-sr-only focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-gray-900"
+            class="sr-only fixed start-4 top-4 z-[60] rounded-full bg-mist px-4 py-3 text-sm font-medium text-ink focus:not-sr-only focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-white"
         >
             Skip to main content
         </a>
-        <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-100">
-            <nav class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+        <header class="sticky top-0 z-50 px-4 pb-2 pt-3 sm:px-6">
+            <nav class="mx-auto flex max-w-shell items-center justify-between gap-4 rounded-full border border-white/10 bg-ink/70 px-4 py-3 shadow-glow backdrop-blur-2xl sm:px-6">
                 <a
                     href={localePath(locale)}
-                    class="inline-flex min-h-[44px] items-center rounded-lg px-2 py-2 text-xl font-semibold tracking-tight text-gray-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900"
+                    class="inline-flex min-h-[44px] items-center rounded-full px-3 py-2 font-display text-lg font-semibold tracking-[-0.03em] text-mist focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                 >
                     Euler Soft
                 </a>
                 <div class="flex items-center gap-2 sm:gap-3">
                     <a href={localePath(locale, "/support")} class={navLinkClass}>{t(s, "nav.support")}</a>
                     <a href={localePath(locale, "/contact")} class={navLinkClass}>{t(s, "nav.contact")}</a>
-                    <div class="hidden sm:flex items-center gap-4">
+                    <div class="hidden items-center gap-2 lg:flex">
                         <a href={localePath(locale, "/privacy-policy")} class={navLinkClass}>{t(s, "nav.privacy")}</a>
                         <a href={localePath(locale, "/terms-of-use")} class={navLinkClass}>{t(s, "nav.terms")}</a>
                     </div>
@@ -132,14 +132,14 @@ const structuredData = JSON.stringify([
             </nav>
         </header>
 
-        <main id="main-content">
+        <main id="main-content" class="min-h-[70vh]">
             <slot />
         </main>
 
-        <footer class="border-t border-gray-100 mt-24">
-            <div class="max-w-5xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-400">
+        <footer class="mt-24 border-t border-white/10">
+            <div class="mx-auto flex max-w-shell flex-col gap-6 px-6 py-10 text-sm text-white/[0.48] sm:flex-row sm:items-center sm:justify-between">
                 <p>{t(s, "footer.copyright", { year: new Date().getFullYear().toString() })}</p>
-                <div class="flex flex-wrap justify-center gap-4 sm:gap-6">
+                <div class="flex flex-wrap justify-center gap-2 sm:justify-end">
                     <a href={localePath(locale, "/support")} class={footerLinkClass}>{t(s, "nav.support")}</a>
                     <a href={localePath(locale, "/contact")} class={footerLinkClass}>{t(s, "footer.contact")}</a>
                     <a href={localePath(locale, "/privacy-policy")} class={footerLinkClass}>{t(s, "footer.privacy")}</a>
@@ -147,5 +147,46 @@ const structuredData = JSON.stringify([
                 </div>
             </div>
         </footer>
+
+        <style is:global>
+            :root {
+                color-scheme: dark;
+            }
+
+            html {
+                scroll-behavior: smooth;
+            }
+
+            body {
+                background:
+                    radial-gradient(circle at top, rgba(89, 208, 255, 0.16), transparent 28rem),
+                    radial-gradient(circle at 80% 0%, rgba(120, 121, 255, 0.16), transparent 28rem),
+                    linear-gradient(180deg, #05070b 0%, #070b12 36%, #090d16 100%);
+            }
+
+            body::before {
+                content: "";
+                pointer-events: none;
+                position: fixed;
+                inset: 0;
+                background-image:
+                    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+                background-position: center;
+                background-size: 72px 72px;
+                mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.36), transparent 80%);
+                opacity: 0.18;
+                z-index: -1;
+            }
+
+            ::selection {
+                background: rgba(89, 208, 255, 0.32);
+                color: #f5f7fb;
+            }
+
+            summary::-webkit-details-marker {
+                display: none;
+            }
+        </style>
     </body>
 </html>

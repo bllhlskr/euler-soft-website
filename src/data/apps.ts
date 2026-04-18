@@ -5,7 +5,10 @@ export interface App {
     description: string;
     appStoreUrl: string;
     category: string;
+    theme: AppTheme;
 }
+
+export type AppTheme = "sky" | "mint" | "violet" | "amber" | "rose" | "peach";
 
 export const apps: App[] = [
     {
@@ -15,6 +18,7 @@ export const apps: App[] = [
         description: "Take control of your diabetes with confidence.",
         appStoreUrl: "https://apps.apple.com/us/app/blood-sugar-tracker-glucose/id1568059086",
         category: "Medical",
+        theme: "sky",
     },
     {
         slug: "plant-identifier",
@@ -23,6 +27,7 @@ export const apps: App[] = [
         description: "Turn your phone into the ultimate plant care tool.",
         appStoreUrl: "https://apps.apple.com/us/app/plant-identifier-water-diary/id1558263170",
         category: "Lifestyle",
+        theme: "mint",
     },
     {
         slug: "insect-identifier",
@@ -31,6 +36,7 @@ export const apps: App[] = [
         description: "Your pocket-sized bug identifier and nature companion.",
         appStoreUrl: "https://apps.apple.com/us/app/insect-identifier-bug-bite/id6478978580",
         category: "Education",
+        theme: "amber",
     },
     {
         slug: "antique-identifier",
@@ -39,6 +45,7 @@ export const apps: App[] = [
         description: "Uncover the history and value of antiques with AI.",
         appStoreUrl: "https://apps.apple.com/us/app/antique-identify-value/id6746053182",
         category: "Reference",
+        theme: "peach",
     },
     {
         slug: "card-value-scanner",
@@ -47,6 +54,7 @@ export const apps: App[] = [
         description: "Understand what your baseball cards are truly worth.",
         appStoreUrl: "https://apps.apple.com/us/app/baseball-card-value-scanner/id6746519123",
         category: "Sports",
+        theme: "violet",
     },
     {
         slug: "blood-pressure-diary",
@@ -55,6 +63,7 @@ export const apps: App[] = [
         description: "Track your blood pressure with confidence.",
         appStoreUrl: "https://apps.apple.com/us/app/blood-pressure-diary-log/id1562382455",
         category: "Medical",
+        theme: "sky",
     },
     {
         slug: "card-centering",
@@ -63,6 +72,7 @@ export const apps: App[] = [
         description: "Unlock true grading potential for your trading cards.",
         appStoreUrl: "https://apps.apple.com/us/app/card-centering-calculator/id6747995027",
         category: "Utilities",
+        theme: "violet",
     },
     {
         slug: "fasting-tracker",
@@ -71,6 +81,7 @@ export const apps: App[] = [
         description: "Your personal fasting coach for a healthier lifestyle.",
         appStoreUrl: "https://apps.apple.com/us/app/intermittent-fasting-tracker-8/id1553675533",
         category: "Health & Fitness",
+        theme: "rose",
     },
     {
         slug: "class-planner",
@@ -79,6 +90,7 @@ export const apps: App[] = [
         description: "Keep your semester organized with smart planning.",
         appStoreUrl: "https://apps.apple.com/us/app/class-planner-ai-math-solver/id6755330310",
         category: "Education",
+        theme: "mint",
     },
     {
         slug: "pitch-counter",
@@ -87,6 +99,7 @@ export const apps: App[] = [
         description: "Streamline scorekeeping and pitch tracking for baseball.",
         appStoreUrl: "https://apps.apple.com/us/app/pitch-counter-radar-gun-fynx/id6747143531",
         category: "Sports",
+        theme: "amber",
     },
     {
         slug: "pill-reminder",
@@ -95,5 +108,6 @@ export const apps: App[] = [
         description: "Never forget to take your medication.",
         appStoreUrl: "https://apps.apple.com/us/app/birth-control-reminder-pill/id1563590149",
         category: "Medical",
+        theme: "rose",
     },
 ];

@@ -1,0 +1,219 @@
+---
+import { apps } from "../data/apps";
+import { getAppThemeClasses } from "../data/appThemes";
+import type { Locale } from "../i18n/languages";
+import { localePath, t } from "../i18n/utils";
+import AppCard from "./AppCard.astro";
+
+interface Props {
+    locale: Locale;
+    strings: Record<string, string>;
+}
+
+const { locale, strings: s } = Astro.props;
+const featuredApps = [apps[0], apps[1], apps[3], apps[7]];
+const categories = [...new Set(apps.map((app) => app.category))];
+---
+
+<section class="relative overflow-hidden pb-14 pt-8 sm:pb-20 sm:pt-12">
+    <div class="mx-auto max-w-shell px-6">
+        <div class="relative overflow-hidden rounded-[44px] border border-white/10 bg-white/[0.04] px-6 py-12 shadow-glow backdrop-blur-2xl sm:px-10 sm:py-16 lg:px-14">
+            <div class="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+            <div class="absolute -start-24 top-0 h-80 w-80 rounded-full bg-sky/20 blur-3xl"></div>
+            <div class="absolute -end-20 top-10 h-72 w-72 rounded-full bg-violet/20 blur-3xl"></div>
+            <div class="absolute bottom-0 start-1/3 h-72 w-72 rounded-full bg-mint/10 blur-3xl"></div>
+
+            <div class="relative grid gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(22rem,0.95fr)] lg:items-center">
+                <div class="max-w-3xl">
+                    <div class="flex flex-wrap gap-3">
+                        {categories.slice(0, 5).map((category) => (
+                            <span class="inline-flex min-h-[36px] items-center rounded-full border border-white/10 bg-white/[0.06] px-4 py-1 text-[0.68rem] uppercase tracking-[0.28em] text-white/[0.58]">
+                                {category}
+                            </span>
+                        ))}
+                    </div>
+
+                    <h1 class="mt-8 font-display text-5xl font-semibold tracking-[-0.06em] text-mist sm:text-7xl lg:text-[5.4rem]">
+                        {t(s, "home.title")}
+                    </h1>
+                    <p class="mt-6 max-w-2xl text-lg leading-8 text-white/[0.72] sm:text-xl">
+                        {t(s, "home.subtitle")}
+                    </p>
+
+                    <div class="mt-9 flex flex-col gap-4 sm:flex-row">
+                        <a
+                            href="#apps-grid"
+                            class="inline-flex min-h-[52px] items-center justify-center rounded-full bg-mist px-6 py-3 text-sm font-medium text-ink transition hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                        >
+                            {t(s, "home.cta")}
+                        </a>
+                        <a
+                            href={localePath(locale, "/support")}
+                            class="inline-flex min-h-[52px] items-center justify-center rounded-full border border-white/[0.12] bg-white/[0.05] px-6 py-3 text-sm font-medium text-mist transition hover:bg-white/[0.1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                        >
+                            {t(s, "nav.support")}
+                        </a>
+                    </div>
+
+                    <div class="mt-12 grid gap-4 sm:grid-cols-3">
+                        <div class="rounded-[28px] border border-white/10 bg-white/[0.04] p-5">
+                            <p class="font-display text-4xl font-semibold tracking-[-0.05em] text-mist">{apps.length}</p>
+                            <p class="mt-3 text-sm leading-6 text-white/[0.58]">{categories.slice(0, 3).join(" · ")}</p>
+                        </div>
+                        <div class="rounded-[28px] border border-white/10 bg-white/[0.04] p-5">
+                            <p class="font-display text-4xl font-semibold tracking-[-0.05em] text-mist">{categories.length}</p>
+                            <p class="mt-3 text-sm leading-6 text-white/[0.58]">{categories.slice(3).join(" · ")}</p>
+                        </div>
+                        <div class="rounded-[28px] border border-white/10 bg-white/[0.04] p-5">
+                            <p class="font-display text-2xl font-semibold tracking-[-0.05em] text-mist">48h</p>
+                            <p class="mt-3 text-sm leading-6 text-white/[0.58]">{t(s, "contact.response")}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative mx-auto w-full max-w-[32rem]">
+                    <div class="absolute inset-8 rounded-[40px] border border-white/10 bg-white/[0.05] blur-2xl"></div>
+                    <div class="relative rounded-[40px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.10),rgba(255,255,255,0.02))] p-6 shadow-glow backdrop-blur-2xl">
+                        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                            {featuredApps.map((app) => {
+                                const theme = getAppThemeClasses(app.theme);
+                                return (
+                                    <div class="group relative overflow-hidden rounded-[30px] border border-white/10 bg-white/[0.05] p-4 transition duration-500 hover:-translate-y-1">
+                                        <div class={`absolute inset-0 bg-gradient-to-br ${theme.aura}`}></div>
+                                        <div class="relative">
+                                            <div class="flex items-center justify-between">
+                                                <span class={`inline-flex rounded-full border px-3 py-1 text-[0.65rem] uppercase tracking-[0.26em] ${theme.chip}`}>{app.category}</span>
+                                                <span class="text-[0.65rem] uppercase tracking-[0.26em] text-white/[0.35]">#{app.slug}</span>
+                                            </div>
+                                            <img
+                                                src={app.icon}
+                                                alt=""
+                                                width="120"
+                                                height="120"
+                                                class="mt-10 h-24 w-24 rounded-[26px] shadow-card"
+                                                loading="eager"
+                                                fetchpriority="high"
+                                            />
+                                            <h2 class="mt-6 font-display text-2xl font-semibold tracking-[-0.04em] text-mist">
+                                                {t(s, `app.${app.slug}.name`)}
+                                            </h2>
+                                            <p class="mt-2 text-sm leading-6 text-white/[0.62]">
+                                                {t(s, `app.${app.slug}.description`)}
+                                            </p>
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="pb-20">
+    <div class="mx-auto max-w-shell px-6">
+        <div class="grid gap-6 lg:grid-cols-[1.05fr_minmax(0,0.95fr)]">
+            {apps.slice(0, 2).map((app) => {
+                const theme = getAppThemeClasses(app.theme);
+                return (
+                    <a
+                        href={app.appStoreUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="group relative overflow-hidden rounded-[36px] border border-white/10 bg-white/[0.04] p-8 shadow-glow transition duration-500 hover:-translate-y-1.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                    >
+                        <div class={`absolute inset-0 bg-gradient-to-br ${theme.aura}`}></div>
+                        <div class="relative flex h-full flex-col justify-between gap-10">
+                            <div>
+                                <span class={`inline-flex min-h-[36px] items-center rounded-full border px-4 py-1 text-[0.7rem] uppercase tracking-[0.28em] ${theme.chip}`}>
+                                    {app.category}
+                                </span>
+                                <h2 class="mt-8 max-w-xl font-display text-4xl font-semibold tracking-[-0.05em] text-mist">
+                                    {t(s, `app.${app.slug}.name`)}
+                                </h2>
+                                <p class="mt-4 max-w-xl text-base leading-8 text-white/70">
+                                    {t(s, `app.${app.slug}.description`)}
+                                </p>
+                            </div>
+                            <div class="flex items-end justify-between gap-6">
+                                <img
+                                    src={app.icon}
+                                    alt=""
+                                    width="144"
+                                    height="144"
+                                    class="h-28 w-28 rounded-[30px] shadow-card sm:h-36 sm:w-36"
+                                    loading="lazy"
+                                />
+                                <span class={`inline-flex items-center gap-2 text-sm font-medium text-mist transition duration-300 group-hover:translate-x-1 ${theme.accentText}`}>
+                                    {t(s, "home.cta")}
+                                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M5 12h14m0 0-5-5m5 5-5 5" />
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                );
+            })}
+        </div>
+    </div>
+</section>
+
+<section id="apps-grid" class="pb-20">
+    <div class="mx-auto max-w-shell px-6">
+        <div class="mb-10 max-w-3xl">
+            <p class="text-sm uppercase tracking-[0.34em] text-white/[0.45]">{t(s, "site.title")}</p>
+            <h2 class="mt-4 font-display text-4xl font-semibold tracking-[-0.05em] text-mist sm:text-5xl">
+                {t(s, "site.description")}
+            </h2>
+        </div>
+
+        <div class="grid grid-cols-1 gap-5 lg:grid-cols-3">
+            {apps.map((app) => (
+                <AppCard
+                    name={t(s, `app.${app.slug}.name`)}
+                    icon={app.icon}
+                    description={t(s, `app.${app.slug}.description`)}
+                    appStoreUrl={app.appStoreUrl}
+                    category={app.category}
+                    theme={app.theme}
+                    ctaLabel={t(s, "home.cta")}
+                />
+            ))}
+        </div>
+    </div>
+</section>
+
+<section class="pb-24">
+    <div class="mx-auto max-w-shell px-6">
+        <div class="grid gap-6 lg:grid-cols-[1.05fr_minmax(0,0.95fr)]">
+            <div class="rounded-[36px] border border-white/10 bg-white/[0.04] p-8 shadow-glow backdrop-blur-2xl sm:p-10">
+                <p class="text-sm uppercase tracking-[0.34em] text-white/[0.45]">{t(s, "support.title")}</p>
+                <h2 class="mt-4 font-display text-3xl font-semibold tracking-[-0.05em] text-mist sm:text-5xl">
+                    {t(s, "support.subtitle")}
+                </h2>
+                <a
+                    href={localePath(locale, "/support")}
+                    class="mt-8 inline-flex min-h-[52px] items-center rounded-full bg-mist px-6 py-3 text-sm font-medium text-ink transition hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                >
+                    {t(s, "nav.support")}
+                </a>
+            </div>
+
+            <div class="rounded-[36px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.07),rgba(255,255,255,0.03))] p-8 shadow-glow backdrop-blur-2xl sm:p-10">
+                <p class="text-sm uppercase tracking-[0.34em] text-white/[0.45]">{t(s, "contact.title")}</p>
+                <h2 class="mt-4 font-display text-3xl font-semibold tracking-[-0.05em] text-mist sm:text-5xl">
+                    {t(s, "contact.subtitle")}
+                </h2>
+                <a
+                    href={localePath(locale, "/contact")}
+                    class="mt-8 inline-flex min-h-[52px] items-center rounded-full border border-white/[0.12] bg-white/[0.06] px-6 py-3 text-sm font-medium text-mist transition hover:bg-white/[0.1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                >
+                    {t(s, "nav.contact")}
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

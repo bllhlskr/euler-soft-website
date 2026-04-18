@@ -16,7 +16,7 @@ const menuId = "language-switcher-menu";
 <div class="relative" data-lang-switcher>
     <button
         type="button"
-        class="inline-flex min-h-[44px] items-center gap-1.5 rounded-lg px-3 py-2 text-sm text-gray-500 transition-colors hover:bg-gray-50 hover:text-gray-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900"
+        class="inline-flex min-h-[44px] items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.05] px-3 py-2 text-sm text-white/[0.7] transition hover:bg-white/[0.1] hover:text-mist focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
         aria-label="Change language"
         aria-controls={menuId}
         aria-expanded="false"
@@ -31,7 +31,7 @@ const menuId = "language-switcher-menu";
 
     <div
         id={menuId}
-        class="absolute right-0 top-full z-50 mt-1 w-48 max-h-64 overflow-y-auto rounded-xl border border-gray-100 bg-white shadow-lg"
+        class="absolute right-0 top-full z-50 mt-2 w-56 max-h-72 overflow-y-auto rounded-[24px] border border-white/10 bg-ink/95 p-2 shadow-glow backdrop-blur-2xl"
         role="menu"
         hidden
         data-lang-menu
@@ -46,8 +46,8 @@ const menuId = "language-switcher-menu";
                     aria-checked={isActive ? "true" : "false"}
                     aria-current={isActive ? "true" : undefined}
                     class:list={[
-                        "flex min-h-[44px] items-center gap-2.5 px-3 py-2 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-gray-900",
-                        isActive ? "bg-gray-50 text-gray-900 font-medium" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
+                        "flex min-h-[44px] items-center gap-2.5 rounded-[18px] px-3 py-2 text-sm transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-white",
+                        isActive ? "bg-white/[0.1] text-mist font-medium" : "text-white/[0.65] hover:bg-white/[0.06] hover:text-mist",
                     ]}
                     tabindex="-1"
                     data-lang-item

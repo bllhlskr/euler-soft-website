@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import LegalShell from "../../components/LegalShell.astro";
 import { nonDefaultLocales, type Locale } from "../../i18n/languages";
 import { loadTranslation, t } from "../../i18n/utils";
 
@@ -19,14 +20,14 @@ try {
 ---
 
 <BaseLayout title={`${t(s, "footer.privacy")} — Euler Soft`} description={t(s, "site.description")} locale={lang}>
-    <article class="max-w-3xl mx-auto px-6 py-16 prose prose-gray">
-        {!legalHtml && (
-            <div class="not-prose mb-8 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
-                {courtesyParts[0]}
-                <a href="/privacy-policy" class="font-medium underline">{t(s, "legal.courtesy.link")}</a>
-                {courtesyParts[1]}
-            </div>
-        )}
+    <LegalShell
+        title={t(s, "footer.privacy")}
+        subtitle={t(s, "site.description")}
+        courtesyBefore={!legalHtml ? courtesyParts[0] : undefined}
+        courtesyAfter={!legalHtml ? courtesyParts[1] : undefined}
+        courtesyHref={!legalHtml ? "/privacy-policy" : undefined}
+        courtesyLabel={!legalHtml ? t(s, "legal.courtesy.link") : undefined}
+    >
         {legalHtml ? <Fragment set:html={legalHtml} /> : null}
-    </article>
+    </LegalShell>
 </BaseLayout>
