@@ -1,7 +1,8 @@
 ---
 import LanguageSwitcher from "../components/LanguageSwitcher.astro";
+import { apps } from "../data/apps";
 import { defaultLocale, languages, type Locale } from "../i18n/languages";
-import { localePath, loadTranslation, t } from "../i18n/utils";
+import { localePath, loadTranslation, stripLocaleFromPath, t } from "../i18n/utils";
 
 interface Props {
     title: string;
@@ -13,6 +14,66 @@ const { title, description = "Euler Soft — iOS apps crafted with care.", local
 const s = await loadTranslation(locale);
 const dir = languages[locale].dir;
 const currentPath = Astro.url.pathname;
+const siteUrl = Astro.site?.toString() ?? "https://euler-soft.com";
+const normalizedPath = stripLocaleFromPath(locale, currentPath);
+const canonicalUrl = new URL(currentPath, siteUrl).toString();
+const defaultOgImage = new URL("/images/blood-sugar-tracker.png", siteUrl).toString();
+const navLinkClass = "inline-flex min-h-[44px] items-center rounded-lg px-3 py-2 text-sm text-gray-500 transition-colors hover:bg-gray-50 hover:text-gray-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900";
+const footerLinkClass = "inline-flex min-h-[44px] items-center rounded-lg px-2 py-2 transition-colors hover:text-gray-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900";
+const ogLocaleByLanguage: Record<Locale, string> = {
+    en: "en_US",
+    tr: "tr_TR",
+    de: "de_DE",
+    fr: "fr_FR",
+    es: "es_ES",
+    it: "it_IT",
+    pt: "pt_BR",
+    ja: "ja_JP",
+    ko: "ko_KR",
+    zh: "zh_CN",
+    ar: "ar_SA",
+    da: "da_DK",
+    fi: "fi_FI",
+    he: "he_IL",
+    id: "id_ID",
+    nl: "nl_NL",
+    nb: "nb_NO",
+    pl: "pl_PL",
+    ru: "ru_RU",
+    sv: "sv_SE",
+    th: "th_TH",
+    uk: "uk_UA",
+    vi: "vi_VN",
+};
+const structuredData = JSON.stringify([
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        name: "Euler Soft",
+        url: siteUrl,
+        logo: new URL("/favicon.svg", siteUrl).toString(),
+        contactPoint: {
+            "@type": "ContactPoint",
+            email: "eulersoft@outlook.com",
+            contactType: "customer support",
+            availableLanguage: Object.keys(languages),
+        },
+    },
+    {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        name: "Euler Soft iOS Apps",
+        itemListElement: apps.map((app, index) => ({
+            "@type": "SoftwareApplication",
+            position: index + 1,
+            name: app.name,
+            applicationCategory: app.category,
+            operatingSystem: "iOS",
+            url: app.appStoreUrl,
+            image: new URL(app.icon, siteUrl).toString(),
+        })),
+    },
+]);
 ---
 
 <!doctype html>
@@ -22,31 +83,56 @@ const currentPath = Astro.url.pathname;
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content={description} />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <link rel="alternate" hreflang="x-default" href="https://euler-soft.com/" />
+        <link rel="canonical" href={canonicalUrl} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={defaultOgImage} />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content={ogLocaleByLanguage[locale]} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={defaultOgImage} />
+        <link rel="alternate" hreflang="x-default" href={new URL(normalizedPath, siteUrl).toString()} />
         {Object.keys(languages).map((lang) => (
-            <link rel="alternate" hreflang={lang} href={`https://euler-soft.com${localePath(lang as Locale, "/")}`} />
+            <link
+                rel="alternate"
+                hreflang={lang}
+                href={new URL(localePath(lang as Locale, normalizedPath), siteUrl).toString()}
+            />
         ))}
+        <script type="application/ld+json" set:html={structuredData}></script>
         <title>{title}</title>
     </head>
     <body class="bg-white text-gray-900 antialiased">
+        <a
+            href="#main-content"
+            class="sr-only fixed start-4 top-4 z-[60] rounded-lg bg-gray-900 px-4 py-3 text-sm font-medium text-white focus:not-sr-only focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-gray-900"
+        >
+            Skip to main content
+        </a>
         <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-100">
             <nav class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
-                <a href={localePath(locale)} class="text-xl font-semibold tracking-tight text-gray-900">
+                <a
+                    href={localePath(locale)}
+                    class="inline-flex min-h-[44px] items-center rounded-lg px-2 py-2 text-xl font-semibold tracking-tight text-gray-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900"
+                >
                     Euler Soft
                 </a>
-                <div class="flex items-center gap-4 sm:gap-6 text-sm text-gray-500">
-                    <a href={localePath(locale, "/support")} class="hover:text-gray-900 transition-colors">{t(s, "nav.support")}</a>
-                    <a href={localePath(locale, "/contact")} class="hover:text-gray-900 transition-colors">{t(s, "nav.contact")}</a>
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <a href={localePath(locale, "/support")} class={navLinkClass}>{t(s, "nav.support")}</a>
+                    <a href={localePath(locale, "/contact")} class={navLinkClass}>{t(s, "nav.contact")}</a>
                     <div class="hidden sm:flex items-center gap-4">
-                        <a href={localePath(locale, "/privacy-policy")} class="hover:text-gray-900 transition-colors">{t(s, "nav.privacy")}</a>
-                        <a href={localePath(locale, "/terms-of-use")} class="hover:text-gray-900 transition-colors">{t(s, "nav.terms")}</a>
+                        <a href={localePath(locale, "/privacy-policy")} class={navLinkClass}>{t(s, "nav.privacy")}</a>
+                        <a href={localePath(locale, "/terms-of-use")} class={navLinkClass}>{t(s, "nav.terms")}</a>
                     </div>
                     <LanguageSwitcher currentLocale={locale} currentPath={currentPath} />
                 </div>
             </nav>
         </header>
 
-        <main>
+        <main id="main-content">
             <slot />
         </main>
 
@@ -54,10 +140,10 @@ const currentPath = Astro.url.pathname;
             <div class="max-w-5xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-400">
                 <p>{t(s, "footer.copyright", { year: new Date().getFullYear().toString() })}</p>
                 <div class="flex flex-wrap justify-center gap-4 sm:gap-6">
-                    <a href={localePath(locale, "/support")} class="hover:text-gray-600 transition-colors">{t(s, "nav.support")}</a>
-                    <a href={localePath(locale, "/contact")} class="hover:text-gray-600 transition-colors">{t(s, "footer.contact")}</a>
-                    <a href={localePath(locale, "/privacy-policy")} class="hover:text-gray-600 transition-colors">{t(s, "footer.privacy")}</a>
-                    <a href={localePath(locale, "/terms-of-use")} class="hover:text-gray-600 transition-colors">{t(s, "footer.terms")}</a>
+                    <a href={localePath(locale, "/support")} class={footerLinkClass}>{t(s, "nav.support")}</a>
+                    <a href={localePath(locale, "/contact")} class={footerLinkClass}>{t(s, "footer.contact")}</a>
+                    <a href={localePath(locale, "/privacy-policy")} class={footerLinkClass}>{t(s, "footer.privacy")}</a>
+                    <a href={localePath(locale, "/terms-of-use")} class={footerLinkClass}>{t(s, "footer.terms")}</a>
                 </div>
             </div>
         </footer>

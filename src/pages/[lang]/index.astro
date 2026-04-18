@@ -13,7 +13,7 @@ const { lang } = Astro.params as { lang: Locale };
 const s = await loadTranslation(lang);
 ---
 
-<BaseLayout title={`${t(s, "home.title")} — ${t(s, "home.subtitle")}`} locale={lang}>
+<BaseLayout title={`${t(s, "home.title")} — ${t(s, "home.subtitle")}`} description={t(s, "site.description")} locale={lang}>
     <section class="max-w-5xl mx-auto px-6 pt-20 pb-16 text-center">
         <h1 class="text-5xl sm:text-6xl font-bold tracking-tight text-gray-900">
             {t(s, "home.title")}
@@ -26,12 +26,11 @@ const s = await loadTranslation(lang);
     <section class="max-w-5xl mx-auto px-6 pb-20">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {apps.map((app) => {
-                const appKey = app.icon.replace("/images/", "").replace(".png", "");
                 return (
                     <AppCard
-                        name={t(s, `app.${appKey}.name`)}
+                        name={t(s, `app.${app.slug}.name`)}
                         icon={app.icon}
-                        description={t(s, `app.${appKey}.description`)}
+                        description={t(s, `app.${app.slug}.description`)}
                         appStoreUrl={app.appStoreUrl}
                         category={app.category}
                     />

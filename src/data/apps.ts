@@ -1,4 +1,5 @@
 export interface App {
+    slug: string;
     name: string;
     icon: string;
     description: string;
@@ -8,6 +9,7 @@ export interface App {
 
 export const apps: App[] = [
     {
+        slug: "blood-sugar-tracker",
         name: "Blood Sugar Tracker",
         icon: "/images/blood-sugar-tracker.png",
         description: "Take control of your diabetes with confidence.",
@@ -15,6 +17,7 @@ export const apps: App[] = [
         category: "Medical",
     },
     {
+        slug: "plant-identifier",
         name: "Plant Identifier & Water Diary",
         icon: "/images/plant-identifier.png",
         description: "Turn your phone into the ultimate plant care tool.",
@@ -22,6 +25,7 @@ export const apps: App[] = [
         category: "Lifestyle",
     },
     {
+        slug: "insect-identifier",
         name: "Insect Identifier",
         icon: "/images/insect-identifier.png",
         description: "Your pocket-sized bug identifier and nature companion.",
@@ -29,6 +33,7 @@ export const apps: App[] = [
         category: "Education",
     },
     {
+        slug: "antique-identifier",
         name: "Antique Identifier",
         icon: "/images/antique-identifier.png",
         description: "Uncover the history and value of antiques with AI.",
@@ -36,6 +41,7 @@ export const apps: App[] = [
         category: "Reference",
     },
     {
+        slug: "card-value-scanner",
         name: "Baseball Card Value Scanner",
         icon: "/images/card-value-scanner.png",
         description: "Understand what your baseball cards are truly worth.",
@@ -43,6 +49,7 @@ export const apps: App[] = [
         category: "Sports",
     },
     {
+        slug: "blood-pressure-diary",
         name: "Blood Pressure Diary",
         icon: "/images/blood-pressure-diary.png",
         description: "Track your blood pressure with confidence.",
@@ -50,6 +57,7 @@ export const apps: App[] = [
         category: "Medical",
     },
     {
+        slug: "card-centering",
         name: "Card Centering Calculator",
         icon: "/images/card-centering.png",
         description: "Unlock true grading potential for your trading cards.",
@@ -57,6 +65,7 @@ export const apps: App[] = [
         category: "Utilities",
     },
     {
+        slug: "fasting-tracker",
         name: "Intermittent Fasting Tracker",
         icon: "/images/fasting-tracker.png",
         description: "Your personal fasting coach for a healthier lifestyle.",
@@ -64,6 +73,7 @@ export const apps: App[] = [
         category: "Health & Fitness",
     },
     {
+        slug: "class-planner",
         name: "Class Planner & AI Math Solver",
         icon: "/images/class-planner.png",
         description: "Keep your semester organized with smart planning.",
@@ -71,6 +81,7 @@ export const apps: App[] = [
         category: "Education",
     },
     {
+        slug: "pitch-counter",
         name: "Pitch Counter - Radar Gun",
         icon: "/images/pitch-counter.png",
         description: "Streamline scorekeeping and pitch tracking for baseball.",
@@ -78,6 +89,7 @@ export const apps: App[] = [
         category: "Sports",
     },
     {
+        slug: "pill-reminder",
         name: "Birth Control Reminder",
         icon: "/images/pill-reminder.png",
         description: "Never forget to take your medication.",

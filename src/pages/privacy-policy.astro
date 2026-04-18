@@ -1,8 +1,12 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import en from "../i18n/ui/en";
+import { t } from "../i18n/utils";
+
+const s = en;
 ---
 
-<BaseLayout title="Privacy Policy — Euler Soft" description="Privacy Policy for all Euler Soft applications.">
+<BaseLayout title={`${t(s, "footer.privacy")} — Euler Soft`} description={t(s, "site.description")}>
     <article class="max-w-3xl mx-auto px-6 py-16 prose prose-gray">
         <h1>Privacy Policy</h1>
         <p class="text-sm text-gray-400">Effective Date: April 4, 2026 &nbsp;|&nbsp; Last Updated: April 4, 2026</p>

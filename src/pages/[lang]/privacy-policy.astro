@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { nonDefaultLocales, defaultLocale, type Locale } from "../../i18n/languages";
-import { loadTranslation, t, localePath } from "../../i18n/utils";
+import { nonDefaultLocales, type Locale } from "../../i18n/languages";
+import { loadTranslation, t } from "../../i18n/utils";
 
 export function getStaticPaths() {
     return nonDefaultLocales.map((lang) => ({ params: { lang } }));
@@ -9,6 +9,7 @@ export function getStaticPaths() {
 
 const { lang } = Astro.params as { lang: Locale };
 const s = await loadTranslation(lang);
+const courtesyParts = t(s, "legal.courtesy").split("{link}");
 
 let legalHtml: string | null = null;
 try {
@@ -17,11 +18,13 @@ try {
 } catch {}
 ---
 
-<BaseLayout title={`${t(s, "footer.privacy")} — Euler Soft`} locale={lang}>
+<BaseLayout title={`${t(s, "footer.privacy")} — Euler Soft`} description={t(s, "site.description")} locale={lang}>
     <article class="max-w-3xl mx-auto px-6 py-16 prose prose-gray">
         {!legalHtml && (
             <div class="not-prose mb-8 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
-                {t(s, "legal.courtesy").replace("{link}", `<a href="/privacy-policy" class="underline font-medium">${t(s, "legal.courtesy.link")}</a>`)}
+                {courtesyParts[0]}
+                <a href="/privacy-policy" class="font-medium underline">{t(s, "legal.courtesy.link")}</a>
+                {courtesyParts[1]}
             </div>
         )}
         {legalHtml ? <Fragment set:html={legalHtml} /> : null}

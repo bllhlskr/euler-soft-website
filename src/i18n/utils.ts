@@ -30,3 +30,14 @@ export function localePath(locale: Locale, path: string = "/"): string {
     if (locale === defaultLocale) return path;
     return `/${locale}${path}`;
 }
+
+export function stripLocaleFromPath(locale: Locale, path: string): string {
+    const normalizedPath = path || "/";
+    if (locale === defaultLocale) return normalizedPath;
+
+    const localePrefix = `/${locale}`;
+    if (!normalizedPath.startsWith(localePrefix)) return normalizedPath;
+
+    const strippedPath = normalizedPath.slice(localePrefix.length);
+    return strippedPath || "/";
+}
