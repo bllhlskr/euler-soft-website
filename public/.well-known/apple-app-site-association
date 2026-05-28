@@ -1,0 +1,34 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": [
+          "3BBSVDLRKV.com.eulersoft.cardvaluescanner",
+          "3BBSVDLRKV.com.eulersoft.cardvaluescanner.staging",
+          "3BBSVDLRKV.com.eulersoft.tcgmoncardscanner"
+        ],
+        "components": [
+          { "/": "/app/*" },
+          { "/": "/deeplink/*" },
+          { "/": "/tcgmon/*" },
+          { "/": "/home/*" },
+          { "/": "/binder/*" },
+          { "/": "/market/*" },
+          { "/": "/wishlist/*" },
+          { "/": "/settings/*" },
+          { "/": "/scan/*" },
+          { "/": "/camera/*" },
+          { "/": "/manual-add/*" },
+          { "/": "/manualAdd/*" },
+          { "/": "/paywall/*" },
+          { "/": "/export-collections/*" },
+          { "/": "/export/*" },
+          { "/": "/all-packages/*" },
+          { "/": "/packages/*" },
+          { "/": "/card/*" },
+          { "/": "/collection/*" }
+        ]
+      }
+    ]
+  }
+}
