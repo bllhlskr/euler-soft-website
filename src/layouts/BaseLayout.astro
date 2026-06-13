@@ -127,6 +127,7 @@ const structuredData = JSON.stringify([
                         <a href={localePath(locale, "/privacy-policy")} class={navLinkClass}>{t(s, "nav.privacy")}</a>
                         <a href={localePath(locale, "/terms-of-use")} class={navLinkClass}>{t(s, "nav.terms")}</a>
                     </div>
+                    <a href="/admin" id="owner-admin-link" class={`${navLinkClass} hidden text-sky`}>Admin</a>
                     <LanguageSwitcher currentLocale={locale} currentPath={currentPath} />
                 </div>
             </nav>
@@ -147,6 +148,14 @@ const structuredData = JSON.stringify([
                 </div>
             </div>
         </footer>
+
+        <script is:inline>
+            // Owner recognition: reveal the Admin nav link only when the owner token is stored.
+            if (localStorage.getItem("eulerOwnerToken")) {
+                var ownerAdminLink = document.getElementById("owner-admin-link");
+                if (ownerAdminLink) ownerAdminLink.classList.remove("hidden");
+            }
+        </script>
 
         <style is:global>
             :root {
