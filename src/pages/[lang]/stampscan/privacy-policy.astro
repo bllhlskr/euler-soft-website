@@ -1,0 +1,32 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import LegalShell from "../../../components/LegalShell.astro";
+import StampscanPrivacyContent from "../../../components/StampscanPrivacyContent.astro";
+import { nonDefaultLocales, type Locale } from "../../../i18n/languages";
+import { loadTranslation, t } from "../../../i18n/utils";
+
+export function getStaticPaths() {
+    return nonDefaultLocales.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: Locale };
+const s = await loadTranslation(lang);
+const courtesyParts = t(s, "legal.courtesy").split("{link}");
+---
+
+<BaseLayout
+    title={`Stampscan — ${t(s, "footer.privacy")}`}
+    description={t(s, "site.description")}
+    locale={lang}
+>
+    <LegalShell
+        title={`Stampscan — ${t(s, "footer.privacy")}`}
+        subtitle={t(s, "site.description")}
+        courtesyBefore={courtesyParts[0]}
+        courtesyAfter={courtesyParts[1]}
+        courtesyHref="/stampscan/privacy-policy"
+        courtesyLabel={t(s, "legal.courtesy.link")}
+    >
+        <StampscanPrivacyContent />
+    </LegalShell>
+</BaseLayout>

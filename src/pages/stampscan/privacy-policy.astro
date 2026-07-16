@@ -1,0 +1,18 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import LegalShell from "../../components/LegalShell.astro";
+import StampscanPrivacyContent from "../../components/StampscanPrivacyContent.astro";
+import en from "../../i18n/ui/en";
+import { t } from "../../i18n/utils";
+
+const s = en;
+---
+
+<BaseLayout
+    title={`Stampscan — ${t(s, "footer.privacy")}`}
+    description={t(s, "site.description")}
+>
+    <LegalShell title={`Stampscan — ${t(s, "footer.privacy")}`} subtitle={t(s, "site.description")}>
+        <StampscanPrivacyContent />
+    </LegalShell>
+</BaseLayout>
