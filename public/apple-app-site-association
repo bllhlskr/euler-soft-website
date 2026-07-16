@@ -31,6 +31,27 @@
       },
       {
         "appIDs": [
+          "3BBSVDLRKV.com.eulersoft.stampscan"
+        ],
+        "components": [
+          { "/": "/app/*" },
+          { "/": "/deeplink/*" },
+          { "/": "/card/*" },
+          { "/": "/collection/*" },
+          { "/": "/scan/*" },
+          { "/": "/settings/*" },
+          { "/": "/stamp/*" },
+          { "/": "/wishlist" },
+          { "/": "/catalog-search" },
+          { "/": "/paywall/*" },
+          { "/": "/insights" },
+          { "/": "/manual-add" },
+          { "/": "/privacy-policy" },
+          { "/": "/terms-of-use" }
+        ]
+      },
+      {
+        "appIDs": [
           "3BBSVDLRKV.com.eulersoft.bloodpressurediary"
         ],
         "components": [
