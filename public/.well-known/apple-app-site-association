@@ -57,6 +57,14 @@
         "components": [
           { "/": "/bp/*", "comment": "Blood Pressure Diary universal links" }
         ]
+      },
+      {
+        "appIDs": [
+          "3BBSVDLRKV.com.eulersoft.comiclens"
+        ],
+        "components": [
+          { "/": "/comiclens/*", "comment": "ComicLens universal links, namespaced so they do not collide with the generic prefixes CardSquad already claims on this domain" }
+        ]
       }
     ]
   }
