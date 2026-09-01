@@ -43,6 +43,7 @@
           { "/": "/stamp/*" },
           { "/": "/wishlist" },
           { "/": "/catalog-search" },
+          { "/": "/credits" },
           { "/": "/paywall/*" },
           { "/": "/insights" },
           { "/": "/manual-add" },
