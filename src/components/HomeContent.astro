@@ -180,6 +180,7 @@ const categories = [...new Set(apps.map((app) => app.category))];
                     category={app.category}
                     theme={app.theme}
                     ctaLabel={t(s, "home.cta")}
+                    webUrl={app.webUrl}
                 />
             ))}
         </div>

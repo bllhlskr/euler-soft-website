@@ -6,6 +6,10 @@ export interface App {
     appStoreUrl: string;
     category: string;
     theme: AppTheme;
+    // Some apps have a site of their own. Naming it here is the only place this
+    // portfolio says so, and it is how somebody who finds the app on the web
+    // reaches the app, and the other way round.
+    webUrl?: string;
 }
 
 export type AppTheme = "sky" | "mint" | "violet" | "amber" | "rose" | "peach";
@@ -53,6 +57,7 @@ export const apps: App[] = [
         icon: "/images/card-value-scanner.png",
         description: "Understand what your baseball cards are truly worth.",
         appStoreUrl: "https://apps.apple.com/us/app/baseball-card-value-scanner/id6746519123",
+        webUrl: "https://sportscardidentifier.com",
         category: "Sports",
         theme: "violet",
     },
@@ -71,6 +76,7 @@ export const apps: App[] = [
         icon: "/images/card-centering.png",
         description: "Unlock true grading potential for your trading cards.",
         appStoreUrl: "https://apps.apple.com/us/app/card-centering-calculator/id6747995027",
+        webUrl: "https://sportscardidentifier.com/card-centering-calculator",
         category: "Utilities",
         theme: "violet",
     },
