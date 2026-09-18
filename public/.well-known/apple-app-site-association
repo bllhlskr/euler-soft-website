@@ -4,6 +4,40 @@
       {
         "appIDs": [
           "3BBSVDLRKV.com.eulersoft.cardvaluescanner",
+          "3BBSVDLRKV.com.eulersoft.cardvaluescanner.staging"
+        ],
+        "components": [
+          { "/": "/app" },
+          { "/": "/app/*" },
+          { "/": "/deeplink" },
+          { "/": "/deeplink/*" },
+          { "/": "/card" },
+          { "/": "/card/*" },
+          { "/": "/collection" },
+          { "/": "/collection/*" },
+          { "/": "/scan" },
+          { "/": "/scan/*" },
+          { "/": "/settings" },
+          { "/": "/settings/*" },
+          { "/": "/paywall" },
+          { "/": "/paywall/*" },
+          { "/": "/support" },
+          { "/": "/support/*" },
+          { "/": "/newsletter" },
+          { "/": "/newsletter/*" },
+          { "/": "/insights" },
+          { "/": "/insights/*" },
+          { "/": "/manual-add" },
+          { "/": "/manual-add/*" },
+          { "/": "/privacy-policy" },
+          { "/": "/privacy-policy/*" },
+          { "/": "/terms-of-use" },
+          { "/": "/terms-of-use/*" }
+        ]
+      },
+      {
+        "appIDs": [
+          "3BBSVDLRKV.com.eulersoft.cardvaluescanner",
           "3BBSVDLRKV.com.eulersoft.cardvaluescanner.staging",
           "3BBSVDLRKV.com.eulersoft.tcgmoncardscanner"
         ],
