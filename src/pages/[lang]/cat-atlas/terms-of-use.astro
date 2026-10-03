@@ -1,0 +1,12 @@
+---
+import CatAtlasLegalPage from "../../../components/CatAtlasLegalPage.astro";
+import { nonDefaultLocales, type Locale } from "../../../i18n/languages";
+
+export function getStaticPaths() {
+    return nonDefaultLocales.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: Locale };
+---
+
+<CatAtlasLegalPage documentType="terms" locale={lang} />

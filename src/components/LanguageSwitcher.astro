@@ -5,9 +5,10 @@ import { localePath, stripLocaleFromPath } from "../i18n/utils";
 interface Props {
     currentLocale?: Locale;
     currentPath?: string;
+    ariaLabel?: string;
 }
 
-const { currentLocale = defaultLocale, currentPath = "/" } = Astro.props;
+const { currentLocale = defaultLocale, currentPath = "/", ariaLabel = "Change language" } = Astro.props;
 const currentLang = languages[currentLocale];
 const basePath = stripLocaleFromPath(currentLocale, currentPath);
 const menuId = "language-switcher-menu";
@@ -17,7 +18,7 @@ const menuId = "language-switcher-menu";
     <button
         type="button"
         class="inline-flex min-h-[44px] items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.05] px-3 py-2 text-sm text-white/[0.7] transition hover:bg-white/[0.1] hover:text-mist focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-        aria-label="Change language"
+        aria-label={ariaLabel}
         aria-controls={menuId}
         aria-expanded="false"
         data-lang-toggle

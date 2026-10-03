@@ -1,0 +1,88 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import LegalShell from "./LegalShell.astro";
+import policy from "../data/cat-atlas-legal.json";
+import { catLegalUI } from "../i18n/cat-atlas-legal";
+import type { Locale } from "../i18n/languages";
+import { loadTranslation, localePath, t } from "../i18n/utils";
+import { legalTextParts } from "../lib/cat-atlas-legal";
+
+interface Props {
+    documentType: "privacy" | "terms";
+    locale: Locale;
+}
+
+const { documentType, locale } = Astro.props;
+const strings = await loadTranslation(locale);
+const document = policy.documents[documentType];
+const label = t(strings, documentType === "privacy" ? "footer.privacy" : "footer.terms");
+const title = `Cat Atlas — ${label}`;
+const englishHref = documentType === "privacy" ? "/cat-atlas/privacy-policy/" : "/cat-atlas/terms-of-use/";
+const englishLabel = t(strings, "legal.courtesy.link");
+const notice = catLegalUI[locale].englishNotice;
+const courtesyParts = notice.split("{link}");
+const description = notice.replace("{link}", englishLabel);
+const contact = policy.controller;
+const linkClass = "inline-flex min-h-[44px] min-w-[44px] max-w-full break-all items-center rounded-md px-2 underline underline-offset-4 hover:opacity-75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2";
+---
+
+<BaseLayout title={title} description={description} locale={locale}
+    privacyPath="/cat-atlas/privacy-policy/" termsPath="/cat-atlas/terms-of-use/" catLegalNavigation={true}>
+    <div class="cat-atlas-legal">
+    <LegalShell
+        title={title}
+        subtitle={description}
+        courtesyBefore={locale !== "en" ? courtesyParts[0] : undefined}
+        courtesyAfter={locale !== "en" ? courtesyParts[1] : undefined}
+        courtesyHref={locale !== "en" ? englishHref : undefined}
+        courtesyLabel={locale !== "en" ? englishLabel : undefined}
+    >
+        <nav aria-label={title} class="not-prose mb-8 flex flex-wrap gap-3">
+            <a href={localePath(locale, "/cat-atlas/privacy-policy/")} class={linkClass}>{t(strings, "footer.privacy")}</a>
+            <a href={localePath(locale, "/cat-atlas/terms-of-use/")} class={linkClass}>{t(strings, "footer.terms")}</a>
+        </nav>
+        <div lang="en" dir="ltr">
+            {policy.effective_date && <p><time datetime={policy.effective_date}>{policy.effective_date}</time></p>}
+            {document.sections.map((section) => (
+                <section aria-labelledby={`cat-${section.id}`}>
+                    <h2 id={`cat-${section.id}`}>{section.heading}</h2>
+                    {section.paragraphs.map((paragraph) => (
+                        <p>{legalTextParts(paragraph).map((part) => part.kind === "link"
+                            ? <a href={part.href} class={linkClass}>{part.text}</a> : part.text)}</p>
+                    ))}
+                </section>
+            ))}
+            <address class="not-italic">
+                {contact.name} / {contact.trading_name}<br />
+                <a href={`mailto:${contact.support_email}`} class={linkClass}>{contact.support_email}</a>
+                {contact.public_postal_address && <p class="whitespace-pre-line">{contact.public_postal_address}</p>}
+                {contact.public_telephone && <p>{contact.public_telephone}</p>}
+            </address>
+        </div>
+    </LegalShell>
+    </div>
+</BaseLayout>
+
+<style>
+    .cat-atlas-legal :global(h1) {
+        max-width: 100%;
+        overflow-wrap: anywhere;
+    }
+    @media (max-width: 639px) {
+        .cat-atlas-legal :global(h1) {
+            font-size: clamp(1.5rem, 6.9vw, 2.25rem);
+        }
+    }
+    .cat-atlas-legal :global(a) {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        min-width: 44px;
+        max-width: 100%;
+        overflow-wrap: anywhere;
+    }
+    .cat-atlas-legal :global(a:focus-visible) {
+        outline: 2px solid currentColor;
+        outline-offset: 4px;
+    }
+</style>

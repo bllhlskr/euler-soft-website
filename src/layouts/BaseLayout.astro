@@ -1,4 +1,5 @@
 ---
+import { catLegalUI } from "../i18n/cat-atlas-legal";
 import LanguageSwitcher from "../components/LanguageSwitcher.astro";
 import { apps } from "../data/apps";
 import { defaultLocale, languages, type Locale } from "../i18n/languages";
@@ -8,10 +9,14 @@ interface Props {
     title: string;
     description?: string;
     locale?: Locale;
+    privacyPath?: string;
+    termsPath?: string;
+    catLegalNavigation?: boolean;
 }
 
-const { title, description = "Euler Soft — iOS apps crafted with care.", locale = defaultLocale } = Astro.props;
+const { title, description, locale = defaultLocale, privacyPath = "/privacy-policy", termsPath = "/terms-of-use", catLegalNavigation = false } = Astro.props;
 const s = await loadTranslation(locale);
+const pageDescription = description ?? t(s, "site.description");
 const dir = languages[locale].dir;
 const currentPath = Astro.url.pathname;
 const siteUrl = Astro.site?.toString() ?? "https://euler-soft.com";
@@ -54,7 +59,7 @@ const structuredData = JSON.stringify([
         logo: new URL("/favicon.svg", siteUrl).toString(),
         contactPoint: {
             "@type": "ContactPoint",
-            email: "eulersoft@outlook.com",
+            email: catLegalNavigation ? "support@euler-soft.com" : "eulersoft@outlook.com",
             contactType: "customer support",
             availableLanguage: Object.keys(languages),
         },
@@ -62,7 +67,7 @@ const structuredData = JSON.stringify([
     {
         "@context": "https://schema.org",
         "@type": "ItemList",
-        name: "Euler Soft iOS Apps",
+        name: t(s, "site.title"),
         itemListElement: apps.map((app, index) => ({
             "@type": "SoftwareApplication",
             position: index + 1,
@@ -81,18 +86,18 @@ const structuredData = JSON.stringify([
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content={description} />
+        <meta name="description" content={pageDescription} />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="canonical" href={canonicalUrl} />
         <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
+        <meta property="og:description" content={pageDescription} />
         <meta property="og:image" content={defaultOgImage} />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="website" />
         <meta property="og:locale" content={ogLocaleByLanguage[locale]} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={title} />
-        <meta name="twitter:description" content={description} />
+        <meta name="twitter:description" content={pageDescription} />
         <meta name="twitter:image" content={defaultOgImage} />
         <link rel="alternate" hreflang="x-default" href={new URL(normalizedPath, siteUrl).toString()} />
         {Object.keys(languages).map((lang) => (
@@ -110,25 +115,26 @@ const structuredData = JSON.stringify([
             href="#main-content"
             class="sr-only fixed start-4 top-4 z-[60] rounded-full bg-mist px-4 py-3 text-sm font-medium text-ink focus:not-sr-only focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-white"
         >
-            Skip to main content
+            {catLegalUI[locale].skipToMain}
         </a>
         <header class="sticky top-0 z-50 px-4 pb-2 pt-3 sm:px-6">
-            <nav class="mx-auto flex max-w-shell items-center justify-between gap-4 rounded-full border border-white/10 bg-ink/70 px-4 py-3 shadow-glow backdrop-blur-2xl sm:px-6">
+            <nav class:list={["mx-auto flex max-w-shell items-center justify-between gap-4 rounded-full border border-white/10 bg-ink/70 px-4 py-3 shadow-glow backdrop-blur-2xl sm:px-6", catLegalNavigation ? "min-w-0 flex-wrap" : ""]}>
                 <a
                     href={localePath(locale)}
                     class="inline-flex min-h-[44px] items-center rounded-full px-3 py-2 font-display text-lg font-semibold tracking-[-0.03em] text-mist focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                 >
                     Euler Soft
                 </a>
-                <div class="flex items-center gap-2 sm:gap-3">
+                <div class:list={["flex items-center gap-2 sm:gap-3", catLegalNavigation ? "w-full min-w-0 max-w-full flex-wrap sm:w-auto" : ""]}>
                     <a href={localePath(locale, "/support")} class={navLinkClass}>{t(s, "nav.support")}</a>
                     <a href={localePath(locale, "/contact")} class={navLinkClass}>{t(s, "nav.contact")}</a>
                     <div class="hidden items-center gap-2 lg:flex">
-                        <a href={localePath(locale, "/privacy-policy")} class={navLinkClass}>{t(s, "nav.privacy")}</a>
-                        <a href={localePath(locale, "/terms-of-use")} class={navLinkClass}>{t(s, "nav.terms")}</a>
+                        <a href={localePath(locale, privacyPath)} class={navLinkClass}>{t(s, "nav.privacy")}</a>
+                        <a href={localePath(locale, termsPath)} class={navLinkClass}>{t(s, "nav.terms")}</a>
                     </div>
                     <a href="/admin" id="owner-admin-link" class={`${navLinkClass} hidden text-sky`}>Admin</a>
-                    <LanguageSwitcher currentLocale={locale} currentPath={currentPath} />
+                    <LanguageSwitcher currentLocale={locale} currentPath={currentPath}
+                        ariaLabel={catLegalNavigation ? catLegalUI[locale].changeLanguage : undefined} />
                 </div>
             </nav>
         </header>
@@ -143,8 +149,8 @@ const structuredData = JSON.stringify([
                 <div class="flex flex-wrap justify-center gap-2 sm:justify-end">
                     <a href={localePath(locale, "/support")} class={footerLinkClass}>{t(s, "nav.support")}</a>
                     <a href={localePath(locale, "/contact")} class={footerLinkClass}>{t(s, "footer.contact")}</a>
-                    <a href={localePath(locale, "/privacy-policy")} class={footerLinkClass}>{t(s, "footer.privacy")}</a>
-                    <a href={localePath(locale, "/terms-of-use")} class={footerLinkClass}>{t(s, "footer.terms")}</a>
+                    <a href={localePath(locale, privacyPath)} class={footerLinkClass}>{t(s, "footer.privacy")}</a>
+                    <a href={localePath(locale, termsPath)} class={footerLinkClass}>{t(s, "footer.terms")}</a>
                 </div>
             </div>
         </footer>

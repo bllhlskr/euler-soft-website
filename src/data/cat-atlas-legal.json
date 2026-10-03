@@ -1,0 +1,229 @@
+{
+  "schema_version": 1,
+  "source_sha256": "ac60619b63028bf3001d0cc946c72ce9721cca95ca2e8019407113960d8aff7a",
+  "source_status": "FACTUAL_COPY_PENDING_SITE_VALIDATION",
+  "effective_date": "2026-10-03",
+  "controller": {
+    "name": "Halis Bilal Kara",
+    "trading_name": "Euler Soft",
+    "support_email": "support@euler-soft.com",
+    "public_postal_address": "Cengiztopel Mah. Alianler Cad. no143 Manisa, Manis 45800, Türkiye",
+    "public_telephone": "+905423732831"
+  },
+  "documents": {
+    "privacy": {
+      "title": "Cat Atlas Privacy Policy",
+      "translator_context": "Cat-only legal notice for an all-age native illustrated search game. Preserve the distinction between local gameplay and networked commerce; anonymous identifiers are not a promise of anonymity. English draft only; do not publish or localize into app resources before factual/legal blockers and independent review are resolved.",
+      "sections": [
+        {
+          "id": "scope",
+          "heading": "Who this notice covers",
+          "translator_context": "Identify the Cat-only controller and contact. Do not carry over another app's minimum playing age or invent public address/telephone details.",
+          "paragraphs": [
+            "This notice explains the information practices of Cat Atlas, operated by Halis Bilal Kara trading as Euler Soft. It applies only to Cat Atlas, not to other Euler Soft apps or to Apple's or RevenueCat's separate services. You can contact us at support@euler-soft.com.",
+            "Cat Atlas can be played at all ages. There is no minimum playing age in this policy. Rules about the legal capacity to make a purchase do not prevent children from playing the base game."
+          ]
+        },
+        {
+          "id": "local_gameplay",
+          "heading": "Gameplay and settings stay on your device",
+          "translator_context": "Explain the currently disabled remote endpoint and the stronger under-18/unknown boundary. An age-group choice is not verified age or parental consent. Do not promise that device backups are controlled by the developer.",
+          "paragraphs": [
+            "The app stores game progress, discoveries, local difficulty history, preferences and your selected age group locally using app-owned UserDefaults. A verified purchase-access cache uses the device Keychain. We do not upload these saves, your age choice, puzzle boards, images, tap events or raw game events to RevenueCat.",
+            "For players under 18 or whose age is unknown, gameplay difficulty decisions remain on the device and are not sent to Jev. No remote gameplay or AI-advice endpoint is enabled in the implementation covered by this notice, including for adults. Any future optional adult remote feature needs a separate data-practice and consent review before it is enabled.",
+            "Your age-group choice changes local behavior; it is not identity verification or a parental-consent check. Device or cloud backups you choose through Apple may contain local app data under Apple's own settings and terms."
+          ]
+        },
+        {
+          "id": "commerce",
+          "heading": "Apple and RevenueCat process commerce",
+          "translator_context": "Do not confuse native entitlement authority with RevenueCat processing. Do not say anonymous IDs are fully anonymized, or that no personal data is handled. The app has no login, custom customer identity or contact attributes.",
+          "paragraphs": [
+            "Optional purchases use Apple's StoreKit purchase system. Apple processes payment and its account, approval and billing information under Apple's own terms. We do not receive your payment-card details or Apple Account password through the app.",
+            "RevenueCat is used for commerce for every age group. Its SDK creates and stores an anonymous app user identifier and communicates purchase-related information, such as receipt or signed transaction data, product identifiers, purchase and renewal events and purchase status. The app's access decision relies only on verified signed native StoreKit transactions, not on RevenueCat's customer profile.",
+            "The app does not ask you to create a login or provide your name, email, phone number or date of birth. We do not give RevenueCat a custom app user ID, customer contact attributes or gameplay attributes. An anonymous app user identifier can still recognize activity over time and must not be treated as fully anonymous or incapable of identifying a device or purchase history."
+          ]
+        },
+        {
+          "id": "technical_metadata",
+          "heading": "Automatic technical information",
+          "translator_context": "Pinned RevenueCat source sends technical headers independently of the attribution collection setting. IDFV is not the advertising IDFA. Reading ATT status does not request consent. Make clear that SDK communication can happen before a purchase.",
+          "paragraphs": [
+            "The RevenueCat SDK may communicate when it is configured and when the app returns to the foreground, before a purchase has been made. Requests can include the anonymous app identifier, a device-vendor identifier (IDFV), device model, operating-system and app versions, preferred locale, storefront country, foreground/background state and product price and currency information.",
+            "An IP address is exposed to providers as part of making an internet connection. RevenueCat's commerce customer records can include first-connection and last-connection information and a country inferred from the connection. These are technical and commerce activity records, not records of cats you found, mistakes you made or rounds you played.",
+            "The SDK can also send the device's existing App Tracking Transparency authorization status as technical metadata even when the app has not requested that permission. We do not collect the advertising identifier (IDFA), supply advertising-network identifiers, or enable advertising attribution integrations in the current app. Disabling automatic attribution-identifier collection does not remove the SDK's separate IDFV request header."
+          ]
+        },
+        {
+          "id": "purposes",
+          "heading": "Why commerce information is used",
+          "translator_context": "Disclose purchase history and automatic commerce activity honestly. Do not equate commerce analytics or a provider customer profile with zero analytics. Do not claim that a narrow legal exception has already been established.",
+          "paragraphs": [
+            "Commerce information supports receipt validation, product and offering delivery, purchase restoration and reconciliation, billing support, security, fraud prevention and commerce analytics, including purchase-history and subscription reporting. RevenueCat can organize this information under a customer profile associated with its identifiers.",
+            "We do not send gameplay or age information to build a gameplay profile, and do not use this commerce processing for targeted advertising or remote changes to a child's game difficulty. Technical identifiers do not become non-personal merely because we do not request a name or email. Apple privacy-label categories and legal definitions of personal information are different questions."
+          ]
+        },
+        {
+          "id": "children",
+          "heading": "Children and caregivers",
+          "translator_context": "All ages may play. Parent/guardian purchase capacity is not a playing ban or a substitute for legally required privacy consent. Do not claim COPPA/GDPR certification or an implemented consent mechanism.",
+          "paragraphs": [
+            "Children may play Cat Atlas without a minimum-age playing gate. A parent or guardian should handle or approve purchases whenever the player lacks the legal capacity to make that purchase. Apple's purchase controls, including any family purchase approval, are not proof of verifiable parental privacy consent for every data practice.",
+            "The app does not currently implement a separate verified parental privacy-consent process. Where applicable law requires a parental notice, consent, retention limit or other safeguard, the operator must satisfy that requirement before the affected processing takes place. This notice does not replace that obligation or claim that selecting an age group provides consent.",
+            "Parents and caregivers can contact support@euler-soft.com about a child's information, request a review of provider-held records and ask to restrict or remove information where applicable. Please begin with a description of the concern without sending a child's personal details."
+          ]
+        },
+        {
+          "id": "sharing",
+          "heading": "Providers, transfers and advertising",
+          "translator_context": "Limit the description to actual Apple/RevenueCat processing. No live ads or gameplay backend exists. Future ad-removal metadata is preparation only. Do not guarantee a storage country, certification or identical third-party legal obligations.",
+          "paragraphs": [
+            "Apple and RevenueCat receive the commerce and technical information needed for their services. They may use service providers to operate those services. Provider processing can take place outside your country. We do not promise that all data stays in a particular region; applicable transfer safeguards and provider arrangements must be assessed for the processing concerned.",
+            "There is no live advertising SDK in the current app and no targeted advertising. Preparation of an ad-removal product does not mean ads are active or that this product is available for sale. Before advertising, extra analytics integrations or a remote gameplay service are introduced, their data collection, child-safety requirements and privacy disclosures must be reviewed and updated.",
+            "RevenueCat's provider information is available at https://www.revenuecat.com/privacy and https://www.revenuecat.com/dpa. Apple's privacy information is available at https://www.apple.com/legal/privacy/. These links explain separate provider practices; they do not replace our responsibility for Cat Atlas."
+          ]
+        },
+        {
+          "id": "retention",
+          "heading": "Storage and retention",
+          "translator_context": "Do not invent a retention deadline, scheduled cleanup, guaranteed erasure or provider backup behavior. The publication gate separately blocks missing finite child-data retention and operator procedures.",
+          "paragraphs": [
+            "Local progress and preferences remain in app-owned device storage until changed or removed. Keychain purchase-access records may remain after uninstall. Removing local game data or uninstalling the app does not cancel a subscription or automatically erase records held by Apple or RevenueCat.",
+            "Provider-held commerce, connection and technical records have separate retention and removal rules. The app does not implement scheduled deletion of those provider records. Contact us to ask about a record's purpose and retention or to request removal, restriction or review under applicable law. Legal billing, dispute or security obligations may affect which records can be removed.",
+            "Children's personal information must not be retained indefinitely where applicable child-privacy law prohibits it. A provider's general retention statement alone does not establish a lawful child-data retention policy or a working deletion process for this app."
+          ]
+        },
+        {
+          "id": "rights_support",
+          "heading": "Questions and privacy requests",
+          "translator_context": "Offer an adult/caregiver contact route with proportional verification, not a fake automated portal or promise to delete Apple's transaction history. Separate voluntary support email processing from normal app payloads.",
+          "paragraphs": [
+            "Depending on applicable law, you or an authorized caregiver may request access, correction, deletion, restriction, objection or portability, or withdraw consent where processing relies on consent. You may also have a right to contact your local privacy regulator. Email support@euler-soft.com with the nature of your request; we may need proportionate information to verify authority and locate the relevant records.",
+            "Do not send a child's name, exact birth date, identity documents, Apple Account password, payment-card details or a raw receipt in your initial email. We will not ask for more information than is necessary to address the request. If you contact support, your email address and the message you voluntarily provide are processed to respond to that request; they are not automatically added to the app's RevenueCat customer attributes.",
+            "A privacy request does not cancel an Apple subscription or automatically remove Apple's billing records. Manage or cancel a subscription through Apple separately. A support request, this notice or a purchase approval is not itself verified parental privacy consent."
+          ]
+        },
+        {
+          "id": "changes",
+          "heading": "Changes to this notice",
+          "translator_context": "State change-management obligations without implying publication, release, legal certification or an already implemented consent feature.",
+          "paragraphs": [
+            "Material changes to Cat Atlas data practices require an updated notice and any additional notice, choice or consent required by applicable law before the changed processing begins. New advertising or remote gameplay is not authorized by this notice. Updated Cat-specific terms do not change the policies of other Euler Soft apps."
+          ]
+        }
+      ]
+    },
+    "terms": {
+      "title": "Cat Atlas Terms of Use",
+      "translator_context": "Plain Cat-only game and purchase terms. All-age playing must remain allowed. Preserve mandatory consumer/privacy rights; do not invent a jurisdiction, liability cap, arbitration clause, static subscription offer or parental consent mechanism. English draft is not ready for publication until the separate factual/legal gates pass.",
+      "sections": [
+        {
+          "id": "scope",
+          "heading": "About these terms",
+          "translator_context": "Name the operator and distinguish this Cat-specific supplement from Apple billing/license terms and other app policies.",
+          "paragraphs": [
+            "Cat Atlas is provided by Halis Bilal Kara trading as Euler Soft. These terms address Cat Atlas gameplay and optional in-app purchases. They do not impose a minimum playing age from another Euler Soft policy, and do not change terms for another app. Contact support@euler-soft.com with questions.",
+            "Where you have legal capacity to agree, these terms govern your use of Cat Atlas. They operate alongside Apple's applicable App Store terms and the license terms presented for the app. They do not replace Apple's billing agreement or reduce any mandatory rights you have."
+          ]
+        },
+        {
+          "id": "all_age_play",
+          "heading": "Playing and making purchases are different",
+          "translator_context": "Keep child base play available. Legal capacity/guardian approval applies to purchases, not an age ban or a claim of verified parental privacy consent.",
+          "paragraphs": [
+            "Players of all ages may play the base game. Purchase approval is not a minimum age for playing Cat Atlas. If a player cannot legally enter a purchase agreement, a parent or guardian must make or approve that purchase in accordance with applicable law and Apple's controls.",
+            "A parent or guardian can review these terms and use device or family purchase controls. Such controls do not establish that every child-data processing requirement has been satisfied. No purchase is required to finish the base puzzles."
+          ]
+        },
+        {
+          "id": "license",
+          "heading": "Your use of the app",
+          "translator_context": "Avoid rewriting Apple's standard license or introducing an unapproved governing law. Mandatory lawful exceptions remain protected.",
+          "paragraphs": [
+            "Use Cat Atlas on supported devices in accordance with the license and usage rules supplied through the App Store. The game, artwork and software remain protected by their applicable intellectual-property rights. Do not distribute unauthorized copies, tamper with purchase verification or use the app unlawfully. Any exception permitted by applicable law or an included open-source license remains available.",
+            "Apple's standard license terms, where applicable to your download, are available at https://www.apple.com/legal/internet-services/itunes/dev/stdeula/."
+          ]
+        },
+        {
+          "id": "base_game",
+          "heading": "Base play and optional features",
+          "translator_context": "Do not sell future content as delivered or imply forced payments/ads. Terms need not enumerate a fixed product set or billing period.",
+          "paragraphs": [
+            "Base puzzles can be completed without a purchase or forced advertising. Optional paid features are described in the app before purchase. A subscription or pack does not buy ownership of the app or its underlying artwork.",
+            "An ad-removal product prepared for a possible future advertising integration is not a claim that ads are currently active, nor a promise that this product is on sale. Do not assume a future feature is included unless the purchase screen expressly describes it."
+          ]
+        },
+        {
+          "id": "purchases",
+          "heading": "Read Apple's purchase details before confirming",
+          "translator_context": "Prices, periods, trials and future offers must come from live Apple metadata. No numerical price, duration, fixed cadence set or promised trial.",
+          "paragraphs": [
+            "The app and Apple's confirmation sheet show the applicable product, price, currency, billing duration, renewal conditions and any eligible trial or introductory offer before you confirm. Read those current details for your storefront. This document does not set a fixed price, billing period or trial duration, and no trial is promised unless the current Apple offer explicitly provides one.",
+            "Purchases are processed through Apple. RevenueCat observes and reconciles commerce information, while verified native StoreKit transactions determine access in Cat Atlas. A RevenueCat service interruption does not turn an already verified native purchase into an instruction to buy again."
+          ]
+        },
+        {
+          "id": "renewal_cancellation",
+          "heading": "Subscription renewal and cancellation",
+          "translator_context": "Keep periods and cancellation timing provider-driven. Do not hardcode a renewal cutoff or say uninstalling cancels billing.",
+          "paragraphs": [
+            "An auto-renewing subscription renews automatically under the current conditions displayed by Apple unless canceled in accordance with Apple's instructions and the law that applies to your purchase. Manage or cancel it in your Apple Account subscription settings. Follow Apple's displayed timing for any offer or upcoming renewal.",
+            "Stopping play, uninstalling Cat Atlas or asking us to remove information does not cancel a subscription. Cancellation usually affects future renewal; the access and billing consequences depend on the Apple transaction and applicable consumer rules. Apple's current cancellation instructions are at https://support.apple.com/en-us/118428."
+          ]
+        },
+        {
+          "id": "restore_pending",
+          "heading": "Restoring purchases and pending requests",
+          "translator_context": "Explain native restore and duplicate-purchase guard without claiming Apple proves a request declined or that restoring initiates a charge.",
+          "paragraphs": [
+            "Use Restore Purchases in the app to ask Apple to refresh eligible purchases for the relevant Apple Account. Restoration is not a new purchase. Product availability, account ownership and valid native transaction status affect whether access can be restored.",
+            "A purchase request can remain pending, for example while family approval is awaited. Do not start another purchase merely because approval or provider synchronization is delayed. The app offers a deliberate check for a request you know was declined or canceled; that check does not itself buy anything or prove why Apple did not return an active entitlement. A later purchase requires another deliberate confirmation.",
+            "Purchase access follows verified native status, including applicable expiration, revocation and signed grace information. Local gameplay saves are separate from commerce access."
+          ]
+        },
+        {
+          "id": "refunds",
+          "heading": "Refund requests",
+          "translator_context": "Apple handles Apple-billed refund requests, but mandatory consumer remedies are not excluded or made contingent on Apple's discretion.",
+          "paragraphs": [
+            "For a purchase billed by Apple, use https://reportaproblem.apple.com or Apple's support process to request a refund. Eligibility and processing depend on Apple's applicable terms and local law. Contact us if you need help identifying an app issue, without sending a raw receipt or payment credentials in your initial message.",
+            "These terms do not make all purchases non-refundable or take away statutory cancellation, refund or other consumer remedies. Apple's current refund instructions are at https://support.apple.com/en-us/118223."
+          ]
+        },
+        {
+          "id": "privacy",
+          "heading": "Privacy and children's information",
+          "translator_context": "Reference the separate Cat notice without converting purchase permission into blanket privacy consent.",
+          "paragraphs": [
+            "The Cat Atlas Privacy Policy explains local saves and networked commerce, including RevenueCat's anonymous identifier, technical information and commerce analytics. Playing, accepting these terms or approving an Apple purchase does not supply any separate parental privacy consent required by applicable law. The operator must meet those obligations independently."
+          ]
+        },
+        {
+          "id": "service_changes",
+          "heading": "Changes and technical availability",
+          "translator_context": "Avoid an arbitrary right to erase saves, remove bought features without remedies, or promise perpetual availability. Do not certify device coverage.",
+          "paragraphs": [
+            "Updates may fix defects or change supported features. Networked purchase services may sometimes be unavailable; base local play does not depend on a successful RevenueCat response. We do not promise uninterrupted service or compatibility with every future device or operating system.",
+            "Material changes to paid features or these terms must respect applicable notice and consumer-remedy requirements. This section does not authorize the removal of statutory rights or the forfeiture of a valid purchase without remedies required by law."
+          ]
+        },
+        {
+          "id": "mandatory_rights",
+          "heading": "Your legal rights remain",
+          "translator_context": "No fabricated governing law, arbitration, liability cap or blanket no-warranty/refund waiver. Preserve local mandatory consumer, privacy and child-protection rights.",
+          "paragraphs": [
+            "Nothing in these terms excludes or limits mandatory consumer, privacy or child-protection rights, or liability that cannot lawfully be excluded. If a term conflicts with such a right, the applicable mandatory rule controls. No jurisdiction-specific waiver, arbitration requirement or liability amount is created by these terms."
+          ]
+        },
+        {
+          "id": "contact",
+          "heading": "Contact Euler Soft",
+          "translator_context": "Use only the approved public support contact. No private App Store Connect address or phone number may be inserted without approval.",
+          "paragraphs": [
+            "For Cat Atlas support, purchase-feature questions or privacy concerns, contact Halis Bilal Kara / Euler Soft at support@euler-soft.com. A parent or caregiver may contact us on a child's behalf. Do not include a child's personal details or purchase credentials in your initial message."
+          ]
+        }
+      ]
+    }
+  }
+}
