@@ -1,0 +1,39 @@
+---
+export function getStaticPaths() {
+  const routes = [
+    undefined,
+    "today", "progress", "fast", "fast/start", "fast/stop", "fast/history", "fast/calendar", "fast/plans",
+    "insights", "insights/weekly", "insights/monthly", "insights/trends", "profile", "settings",
+    "settings/notifications", "settings/privacy", "settings/units", "settings/export", "settings/help",
+    "water", "water/add", "log/weight", "log/meal", "log/water", "log/hunger", "log/mood", "log/energy",
+    "log/measurement", "log/photo", "coach", "learn", "history", "progress/weight", "progress/photos",
+    "paywall", "paywall/discount", "subscriptions", "health", "habits", "goals", "nutrition", "share",
+    "share/app", "help", "help/faq", "feedback/bug", "feedback/idea", "about",
+  ];
+  return routes.map((route) => ({ params: { route } }));
+}
+const storeUrl = "https://apps.apple.com/app/id1553675533";
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="apple-itunes-app" content="app-id=1553675533" />
+    <meta http-equiv="refresh" content={`1;url=${storeUrl}`} />
+    <meta name="robots" content="noindex" />
+    <title>Lento</title>
+    <style>
+      body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #f6f3ec; color: #1d2a24; font: 17px/1.5 -apple-system, system-ui, sans-serif; text-align: center; padding: 24px; }
+      a { display: inline-block; margin-top: 16px; padding: 14px 28px; border-radius: 999px; background: #2f5d4a; color: #fff; text-decoration: none; font-weight: 600; }
+      @media (prefers-color-scheme: dark) { body { background: #14201b; color: #e8efe9; } a { background: #9ccbae; color: #14201b; } }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Lento</h1>
+      <p>Opening the App Store.</p>
+      <a href={storeUrl}>Get Lento</a>
+    </main>
+  </body>
+</html>
