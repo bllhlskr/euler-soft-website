@@ -106,6 +106,7 @@
           "3BBSVDLRKV.com.eulersoft.fastingcoach"
         ],
         "components": [
+          { "/": "/lento/privacy-policy*", "exclude": true, "comment": "The Lento privacy policy opens in the browser, not in the app" },
           { "/": "/lento", "comment": "Lento fasting tracker universal links, namespaced under /lento" },
           { "/": "/lento/*" }
         ]
