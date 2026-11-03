@@ -2,7 +2,7 @@
 <p class="text-sm text-gray-400">Effective date: November 3, 2026</p>
 
 <p>
-    Lento (shown on the App Store as Intermittent Fasting Tracker) is provided by Euler Soft. This policy
+    Lento is provided by Euler Soft. This policy
     explains what Lento processes, why it is processed, where it is stored, and the choices available to you.
     Lento is a wellness app. It does not provide medical advice, diagnosis, or treatment.
 </p>
@@ -28,8 +28,9 @@
 <h2>Lento Cloud Sync (Optional)</h2>
 <p>
     If you turn on &quot;Sync to Lento cloud&quot; in Profile &gt; Privacy, your fasts, weight entries,
-    check-ins, and habits (including notes, shortened to 1,000 characters) are stored in Euler Soft&apos;s
-    database on Cloudflare so they can be restored and kept in step across your devices. Progress photos and
+    check-ins, and habits (including notes, shortened to 1,000 characters) are copied to Euler Soft&apos;s
+    database on Cloudflare. The copy is linked to this installation of Lento through an anonymous identifier,
+    not to an account, so it cannot be moved to another device or to a new installation. Progress photos and
     body measurements are not synced. Turning sync off stops uploads; records already on the server stay
     there until you use &quot;Delete all data&quot;, which erases them from the server as well as from your
     device.
@@ -47,8 +48,8 @@
 
 <h2>Device Security and Identifiers</h2>
 <p>
-    Lento creates an anonymous user identifier on Euler Soft&apos;s server. It is not linked to your name,
-    email address, or Apple ID. Requests are protected with Apple App Attest and Firebase App Check, which
+    Lento creates an anonymous user identifier on Euler Soft&apos;s server for this installation, bound to a
+    device key from Apple App Attest. It is not linked to your name, email address, Apple ID, or purchases. Requests are protected with Apple App Attest and Firebase App Check, which
     confirm they come from a genuine copy of Lento, and with encrypted connections to a pinned server
     certificate. The anonymous identifier is used to prevent abuse and to keep your synced data and Live
     Activity records separate from other users.
@@ -98,8 +99,9 @@
 <p>
     Synced records stay on the server
     until you delete them or use &quot;Delete all data&quot;, which removes every record linked to your
-    anonymous identifier from the server (an internet connection is needed for that part). Limited security records are kept only as long as needed to
-    prevent abuse. Provider-held crash, analytics, and purchase records follow each
+    anonymous identifier from the server (an internet connection is needed for that part). If Lento is not opened
+    for 13 months, the anonymous identifier and every record linked to it are deleted from the server
+    automatically. Limited security records are kept only as long as needed to prevent abuse. Provider-held crash, analytics, and purchase records follow each
     provider&apos;s retention settings.
 </p>
 <p>
